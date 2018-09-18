@@ -1,4 +1,4 @@
-package sandbox
+package sandbox.typeclasses
 
 final case class Person(name: String, email: String)
 object JsonWriterInstances {

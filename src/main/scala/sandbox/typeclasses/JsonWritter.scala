@@ -1,4 +1,4 @@
-package sandbox
+package sandbox.typeclasses
 // Define a very simple JSON AST
 sealed trait Json
 final case class JsObject(get: Map[String, Json]) extends Json
