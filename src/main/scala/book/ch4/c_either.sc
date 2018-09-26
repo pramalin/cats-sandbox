@@ -2,7 +2,7 @@ package book.ch4
 import cats.syntax.either._ // for map and flatMap
 
 
-object e_either {
+object c_either {
 
   // 4.4.1 Left and Right Bias
   val either1: Either[String, Int] = Right(10)    //> either1  : Either[String,Int] = Right(10)

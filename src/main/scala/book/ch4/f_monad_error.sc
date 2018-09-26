@@ -5,7 +5,7 @@ object f_monad_error {
   // 4.5.1 The MonadError Type Class
   //
 
-  /* Here is a simplified version of the defini􀦞on of MonadError:
+  /* Here is a simplified version of the definition of MonadError:
 
 	  package cats
 		trait MonadError[F[_], E] extends Monad[F] {
@@ -30,7 +30,7 @@ object f_monad_error {
 
   type ErrorOr[A] = Either[String, A]
   val monadError = MonadError[ErrorOr, String]    //> monadError  : cats.MonadError[book.ch4.f_monad_error.ErrorOr,String] = cats.
-                                                  //| instances.EitherInstances$$anon$1@73c6c3b2
+                                                  //| instances.EitherInstances$$anon$1@3b764bce
   //
   // 4.5.2 Raising and Handling Errors
   //

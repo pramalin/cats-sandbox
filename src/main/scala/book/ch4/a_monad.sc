@@ -2,7 +2,7 @@ package book.ch4
 
 object a_monad {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
-
+ // 4.1 What is a Monad?
   def parseInt(str: String): Option[Int] =
     scala.util.Try(str.toInt).toOption            //> parseInt: (str: String)Option[Int]
   def divide(a: Int, b: Int): Option[Int] =

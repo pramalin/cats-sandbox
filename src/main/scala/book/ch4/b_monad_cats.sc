@@ -49,14 +49,14 @@ object b_monad_cats {
 	*/
 
   val fm = Monad[Future]                          //> fm  : cats.Monad[scala.concurrent.Future] = cats.instances.FutureInstances$
-                                                  //| $anon$1@29ee9faa
+                                                  //| $anon$1@3ffc5af1
 
   val future = fm.flatMap(fm.pure(1))(x => fm.pure(x + 2))
                                                   //> future  : scala.concurrent.Future[Int] = Future(<not completed>)
   Await.result(future, 1.second)                  //> res3: Int = 3
 
   //
-  // Monad Syntax
+  // 4.2.3 Monad Syntax
   //
 
   import cats.Monad
@@ -85,7 +85,7 @@ object b_monad_cats {
   sumSquare1(List(1, 2, 3), List(4, 5))           //> res7: List[Int] = List(17, 26, 20, 29, 25, 34)
 
   //
-  // The Identity Monad
+  // 4.3 The Identity Monad
   //
 
   // Note: Id can be used wrap Monad around plain values.
@@ -102,7 +102,7 @@ object b_monad_cats {
   sumSquare(3: Id[Int], 4: Id[Int])               //> res8: cats.Id[Int] = 25
 
   /*
-  	Here is the defini􀦞on of Id to explain:
+  	Here is the definition of Id to explain:
 
 		package cats
 		type Id[A] = A
