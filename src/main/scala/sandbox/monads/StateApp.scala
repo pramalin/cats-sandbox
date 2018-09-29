@@ -18,7 +18,7 @@ object StateApp extends App {
     State[List[Int], Int] { stack =>
       (num :: stack, num)
     }
-
+    
   def operator(func: (Int, Int) => Int): CalcState[Int] =
     State[List[Int], Int] {
       case a :: b :: tail =>
@@ -27,7 +27,7 @@ object StateApp extends App {
       case _ =>
         sys.error("Fail!")
     }
-
+    
   println(evalOne("42").runA(Nil).value)
 
   val program = for {
