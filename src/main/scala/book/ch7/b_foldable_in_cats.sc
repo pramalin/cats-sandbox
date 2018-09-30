@@ -46,7 +46,7 @@ object b_foldable_in_cats {
 // java.lang.StackOverflowError
 
   /*
-		Using Foldable forces us to use stack safe opera􀦞ons, which fixes the overflow
+		Using Foldable forces us to use stack safe operations, which fixes the overflow
 		exception:
 	*/
 
@@ -61,8 +61,8 @@ object b_foldable_in_cats {
   /*
 		Stack Safety in the Standard Library
 		Stack safety isn’t typically an issue when using the standard library. The
-		most commonly used collec􀦞on types, such as List and Vector, provide
-		stack safe implementa􀦞ons of foldRight:
+		most commonly used collection types, such as List and Vector, provide
+		stack safe implementations of foldRight:
 	*/
   (1 to 100000).toList.foldRight(0L)(_ + _)       //> res3: Long = 5000050000
 
