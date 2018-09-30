@@ -84,7 +84,7 @@ object UserFormValidation {
 
   /*
       F.4 Form Validation Part 3
-		These defini􀦞ons use the same patterns as above:
+		These definitions use the same patterns as above:
 	*/
   def nonBlank(name: String)(data: String): FailFast[String] =
     Right(data).
@@ -116,7 +116,7 @@ object UserFormValidation {
    */
 
   /*
-    F.6 Form Valida􀦞on Part 5
+    F.6 Form Validation Part 5
 		We can do this by switching from Either to Validated and using apply syntax:
 	*/
 
