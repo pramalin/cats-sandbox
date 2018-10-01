@@ -97,4 +97,5 @@ object c_either {
   // The swap method lets us exchange left for right:
   123.asRight[String]                             //> res15: Either[String,Int] = Right(123)
   123.asRight[String].swap                        //> res16: scala.util.Either[Int,String] = Left(123)
+
 }

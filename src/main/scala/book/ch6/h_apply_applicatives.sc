@@ -79,11 +79,11 @@ object h_apply_applicatives {
 	tics, introduces a set of characteristic methods, and defines the functionality
 	of its supertypes in terms of them:
 		• every monad is an applicative;
-		• every applica􀦞ve a semigroupal;
+		• every applicative a semigroupal;
 		• and so on.
 		
 	Because of the lawful nature of the relationships between the type classes,
-	the inheritance rela􀦞onships are constant across all instances of a type class.
+	the inheritance relationships are constant across all instances of a type class.
 	Apply defines product in terms of ap and map; Monad defines product, ap,
 	and map, in terms of pure and flatMap.
 	
@@ -104,7 +104,7 @@ object h_apply_applicatives {
 	of behaviours than Foo. It has fewer laws to obey (no flatMap), so it can
 	implement behaviours that Foo cannot.
 
-	This demonstrates the classic trade-off of power (in the mathema􀦞cal sense)
+	This demonstrates the classic trade-off of power (in the mathematical sense)
 	versus constraint. The more constraints we place on a data type, the more
 	guarantees we have about its behaviour, but the fewer behaviours we can
 	model.

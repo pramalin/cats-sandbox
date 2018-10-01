@@ -191,7 +191,7 @@ object a_map_reduce_test {
 	*/
 
   Future.sequence(List(Future(1), Future(2), Future(3)))
-                                                  //> res3: scala.concurrent.Future[List[Int]] = Future(<not completed>)
+                                                  //> res3: scala.concurrent.Future[List[Int]] = Future(Success(List(1, 2, 3)))
 
   // or an instance of Traverse:
   import cats.instances.future._ // for Applicative
@@ -305,5 +305,5 @@ object a_map_reduce_test {
 			• quantile estimators such as the t-digest
 			to name but a few.
 	*/
-
+	
 }

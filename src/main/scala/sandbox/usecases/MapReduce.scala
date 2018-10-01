@@ -2,8 +2,6 @@ package sandbox.usecases
 
 object MapReduce {
   import cats.Monoid
-  import cats.instances.int._ // for Monoid
-  import cats.instances.string._ // for Monoid
   import cats.syntax.semigroup._ // for |+|
 
   /* initial
@@ -69,16 +67,11 @@ object MapReduce {
 		We’ll restate all of the necessary imports for completeness:
 	*/
   import cats.Monoid
-  import cats.Foldable
-  import cats.Traverse
-  import cats.instances.int._ // for Monoid
   import cats.instances.future._ // for Applicative and Monad
   import cats.instances.vector._ // for Foldable and Traverse
-  import cats.syntax.semigroup._ // for |+|
   import cats.syntax.foldable._ // for combineAll and foldMap
   import cats.syntax.traverse._ // for traverse
   import scala.concurrent._
-  import scala.concurrent.duration._
   import scala.concurrent.ExecutionContext.Implicits.global
 
   /*
