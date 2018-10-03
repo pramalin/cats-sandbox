@@ -1,4 +1,4 @@
-package sandbox.usecases
+package sandbox.usecases.validation
 
 object Validation7Test {
   import Validation7._

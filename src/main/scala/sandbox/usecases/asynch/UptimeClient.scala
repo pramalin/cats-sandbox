@@ -1,4 +1,4 @@
-package sandbox.usecases
+package sandbox.usecases.asynch
 
 import cats.instances.list._
 import cats.instances.future._

@@ -105,7 +105,7 @@ object a_map_reduce_test {
 		Here’s some sample output for reference:
 	*/
 
-  import sandbox.usecases.MapReduce._
+  import sandbox.usecases.mapreduce.MapReduce._
   import cats.instances.int._ // for Monoid
 
   foldMap(Vector(1, 2, 3))(identity)              //> res0: Int = 6
@@ -197,7 +197,7 @@ object a_map_reduce_test {
   import cats.instances.future._ // for Applicative
   import cats.instances.list._ // for Traverse
   import cats.syntax.traverse._ // for sequence
-  List(Future(1), Future(2), Future(3)).sequence  //> res4: scala.concurrent.Future[List[Int]] = Future(<not completed>)
+  List(Future(1), Future(2), Future(3)).sequence  //> res4: scala.concurrent.Future[List[Int]] = Future(Success(List(1, 2, 3)))
 
   /*
 		An ExecutionContext is required in either case. Finally, we can use

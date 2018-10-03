@@ -1,4 +1,4 @@
-package sandbox.usecases
+package sandbox.usecases.mapreduce
 
 object MapReduce {
   import cats.Monoid

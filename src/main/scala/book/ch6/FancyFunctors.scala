@@ -1,6 +1,6 @@
 package book.ch6
+
 import cats.Monoid
-import cats.instances.boolean._ // for Monoid
 import cats.instances.int._ // for Monoid
 import cats.instances.list._ // for Monoid
 import cats.instances.string._ // for Monoid

@@ -231,7 +231,7 @@ page 205
 
   // Let’s test the behaviour we get. First we’ll setup some checks:
 
-  import sandbox.usecases.Validation1._
+  import sandbox.usecases.validation.Validation1._
   import cats.instances.list._ // for Semigroup
   import cats.syntax.either._ // for asLeft and asRight
 
@@ -239,19 +239,20 @@ page 205
     CheckF { v =>
       if (v > 2) v.asRight
       else List("Must be > 2").asLeft
-    }                                             //> a  : sandbox.usecases.Validation1.CheckF[List[String],Int] = CheckF(book.ch
-                                                  //| 10.a_data_validation$$$Lambda$11/1379435698@29774679)
+    }                                             //> a  : sandbox.usecases.validation.Validation1.CheckF[List[String],Int] = Che
+                                                  //| ckF(book.ch10.a_data_validation$$$Lambda$11/1379435698@29774679)
 
   val b: CheckF[List[String], Int] =
     CheckF { v =>
       if (v < -2) v.asRight
       else List("Must be < -2").asLeft
-    }                                             //> b  : sandbox.usecases.Validation1.CheckF[List[String],Int] = CheckF(book.ch
-                                                  //| 10.a_data_validation$$$Lambda$12/1073502961@5e5792a0)
+    }                                             //> b  : sandbox.usecases.validation.Validation1.CheckF[List[String],Int] = Che
+                                                  //| ckF(book.ch10.a_data_validation$$$Lambda$12/1073502961@5e5792a0)
 
   val check: CheckF[List[String], Int] =
-    a and b                                       //> check  : sandbox.usecases.Validation1.CheckF[List[String],Int] = CheckF(san
-                                                  //| dbox.usecases.Validation1$CheckF$$Lambda$13/1757676444@ae45eb6)
+    a and b                                       //> check  : sandbox.usecases.validation.Validation1.CheckF[List[String],Int] =
+                                                  //|  CheckF(sandbox.usecases.validation.Validation1$CheckF$$Lambda$13/175767644
+                                                  //| 4@ae45eb6)
 
   // Now run the check with some data:
   check(5)                                        //> res2: Either[List[String],Int] = Left(List(Must be < -2))
@@ -267,11 +268,11 @@ page 205
 	*/
 
   val a1: CheckF[Nothing, Int] =
-    CheckF(v => v.asRight)                        //> a1  : sandbox.usecases.Validation1.CheckF[Nothing,Int] = CheckF(book.ch10.a
-                                                  //| _data_validation$$$Lambda$14/517210187@ff5b51f)
+    CheckF(v => v.asRight)                        //> a1  : sandbox.usecases.validation.Validation1.CheckF[Nothing,Int] = CheckF(
+                                                  //| book.ch10.a_data_validation$$$Lambda$14/517210187@ff5b51f)
   val b1: CheckF[Nothing, Int] =
-    CheckF(v => v.asRight)                        //> b1  : sandbox.usecases.Validation1.CheckF[Nothing,Int] = CheckF(book.ch10.a
-                                                  //| _data_validation$$$Lambda$15/633070006@5702b3b1)
+    CheckF(v => v.asRight)                        //> b1  : sandbox.usecases.validation.Validation1.CheckF[Nothing,Int] = CheckF(
+                                                  //| book.ch10.a_data_validation$$$Lambda$15/633070006@5702b3b1)
 
   /*
 		We can create checks just fine but when we come to combine them we get an
@@ -295,20 +296,20 @@ page 205
     Pure { v =>
       if (v > 2) v.asRight
       else List("Must be > 2").asLeft
-    }                                             //> a2  : sandbox.usecases.Validation1.Check[List[String],Int] = Pure(book.ch1
-                                                  //| 0.a_data_validation$$$Lambda$16/1776957250@4b952a2d)
+    }                                             //> a2  : sandbox.usecases.validation.Validation1.Check[List[String],Int] = Pu
+                                                  //| re(book.ch10.a_data_validation$$$Lambda$16/1776957250@4b952a2d)
 
   val b2: Check[List[String], Int] =
     Pure { v =>
       if (v < -2) v.asRight
       else List("Must be < -2").asLeft
-    }                                             //> b2  : sandbox.usecases.Validation1.Check[List[String],Int] = Pure(book.ch1
-                                                  //| 0.a_data_validation$$$Lambda$17/827966648@73846619)
+    }                                             //> b2  : sandbox.usecases.validation.Validation1.Check[List[String],Int] = Pu
+                                                  //| re(book.ch10.a_data_validation$$$Lambda$17/827966648@73846619)
 
   val check2: Check[List[String], Int] =
-    a2 and b2                                     //> check2  : sandbox.usecases.Validation1.Check[List[String],Int] = And(Pure(
-                                                  //| book.ch10.a_data_validation$$$Lambda$16/1776957250@4b952a2d),Pure(book.ch1
-                                                  //| 0.a_data_validation$$$Lambda$17/827966648@73846619))
+    a2 and b2                                     //> check2  : sandbox.usecases.validation.Validation1.Check[List[String],Int] 
+                                                  //| = And(Pure(book.ch10.a_data_validation$$$Lambda$16/1776957250@4b952a2d),Pu
+                                                  //| re(book.ch10.a_data_validation$$$Lambda$17/827966648@73846619))
 
   check2(9)                                       //> res4: Either[List[String],Int] = Left(List(Must be < -2))
   check2(0)                                       //> res5: Either[List[String],Int] = Left(List(Must be > 2, Must be < -2))
@@ -413,7 +414,7 @@ page 205
 
 		Making this change gives us the following code:
 
-				(sandbox.usecases.Predicate)
+				(sandbox.usecases.validation.Predicate)
 
 		10.4.2 Checks
 
@@ -429,7 +430,7 @@ page 205
 
 			See the solution
 
-			sandbox.usecases.Validation4
+			sandbox.usecases.validation.Validation4
 	*/
 
   /*
@@ -465,7 +466,7 @@ page 205
 
 		See the solution
 
-		sandbox.usecases.Validation5
+		sandbox.usecases.validation.Validation5
 	*/
 
   /*
@@ -489,7 +490,7 @@ page 210
 		Implement andThen now!
 		See the solution
 
-		sandbox.usecases.Validation6
+		sandbox.usecases.validation.Validation6
 */
 
   /*
@@ -501,7 +502,7 @@ page 210
 
 		See the solution
 
-		sandbox.usecases.Validation7
+		sandbox.usecases.validation.Validation7
 
 */
 
@@ -528,7 +529,7 @@ page 210
 		(You might find the following predicates useful:)
 
 		See the solution
-		sandbox.usecases.Validation7Test
+		sandbox.usecases.validation.Validation7Test
 */
 
   /*
@@ -536,7 +537,7 @@ page 210
     checkEmail:
   */
 
-	import sandbox.usecases.Validation7Test._
+	import sandbox.usecases.validation.Validation7Test._
   import cats.data.Validated
   import cats.syntax.apply._     // for mapN
 
@@ -547,15 +548,17 @@ page 210
     email:    String): Validated[Errors, User] =
     (checkUsername(username), checkEmail(email)).mapN(User)
                                                   //> createUser: (username: String, email: String)cats.data.Validated[sandbox.u
-                                                  //| secases.Validation7Test.Errors,book.ch10.a_data_validation.User]
+                                                  //| secases.validation.Validation7Test.Errors,book.ch10.a_data_validation.User
+                                                  //| ]
 
   /*
   	We can check our work by creating a couple of example users:
 	*/
-  createUser("Noel", "noel@underscore.io")        //> res6: cats.data.Validated[sandbox.usecases.Validation7Test.Errors,book.ch1
-                                                  //| 0.a_data_validation.User] = Valid(User(Noel,noel@underscore.io))
-  createUser("", "dave@underscore@io")            //> res7: cats.data.Validated[sandbox.usecases.Validation7Test.Errors,book.ch1
-                                                  //| 0.a_data_validation.User] = Invalid(NonEmptyList(Must be longer than 3 cha
-                                                  //| racters, Must contain a single @ character))
+  createUser("Noel", "noel@underscore.io")        //> res6: cats.data.Validated[sandbox.usecases.validation.Validation7Test.Erro
+                                                  //| rs,book.ch10.a_data_validation.User] = Valid(User(Noel,noel@underscore.io)
+                                                  //| )
+  createUser("", "dave@underscore@io")            //> res7: cats.data.Validated[sandbox.usecases.validation.Validation7Test.Erro
+                                                  //| rs,book.ch10.a_data_validation.User] = Invalid(NonEmptyList(Must be longer
+                                                  //|  than 3 characters, Must contain a single @ character))
 
 }
