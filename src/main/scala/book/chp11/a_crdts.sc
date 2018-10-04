@@ -515,6 +515,8 @@ object a_crdts {
 		val merged = counter.merge(g1, g2)//> merged  : Map[String,Int] = Map(a -> 7, b -> 5)
 
 		val total = counter.total(merged) //> total  : Int = 12
+		
+		counter.increment(g1)("b", 1)     //> res0: Map[String,Int] = Map(a -> 7, b -> 4)
 
 /*
 		The implementation strategy for the type class instance is a bit unsatisfying.
