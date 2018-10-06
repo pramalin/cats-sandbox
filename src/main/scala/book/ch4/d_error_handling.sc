@@ -1,59 +1,145 @@
 package book.ch4
-import cats.syntax.either._
 
 object d_error_handling {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+/*
+		4.5 Aside: Error Handling and MonadError
+		
+		Cats provides an additional type class called MonadError that abstracts over
+		Either-like data types that are used for error handling. MonadError provides
+		extra operations for raising and handling errors.
+		
+			This Section is Optional!
+			You won’t need to use MonadError unless you need to abstract over
+			error handling monads. For example, you can use MonadError to abstract
+			over Future and Try, or over Either and EitherT (which we
+			will meet in Chapter 5).
+			
+			If you don’t need this kind of abstraction right now, feel free to skip
+			onwards to Section 4.6.
+		
+		4.5.1 The MonadError Type Class
 
-  // 4.4.4 Error Handling
-  for {
-    a <- 1.asRight[String]
-    b <- 0.asRight[String]
-    c <- if (b == 0) "DIV0".asLeft[Int]
-    else (a / b).asRight[String]
-  } yield c * 100                                 //> res0: scala.util.Either[String,Int] = Left(DIV0)
+		Here is a simplified version of the definition of MonadError:
+	
+					package cats
 
-  /*
-	When using Either for error handling, we need to determine what type we
-	want to use to represent errors. We could use Throwable for this:
+					trait MonadError[F[_], E] extends Monad[F] {
+						// Lift an error into the `F` context:
+						def raiseError[A](e: E): F[A]
 
-	type Result[A] = Either[Throwable, A]
+						// Handle an error, potentially recovering from it:
+						def handleError[A](fa: F[A])(f: E => A): F[A]
 
-	This gives us similar seman􀦞cs to scala.util.Try. The problem, however, is
-	that Throwable is an extremely broad type. We have (almost) no idea about
-	what type of error occurred.
-	Another approach is to define an algebraic data type to represent errors that
-	may occur in our program:
-*/
-  sealed trait LoginError extends Product with Serializable
-  final case class UserNotFound(username: String) extends LoginError
-  final case class PasswordIncorrect(username: String) extends LoginError
-  case object UnexpectedError extends LoginError
-  
-  case class User(username: String, password: String)
-  type LoginResult = Either[LoginError, User]
-  
-  /*
-	This approach solves the problems we saw with Throwable. It gives us a fixed
-	set of expected error types and a catch-all for anything else that we didn’t expect.
-	We also get the safety of exhaustivity checking on any pa􀂂ern matching
-	we do:
+						// Test an instance of `F`,
+						// failing if the predicate is not satisfied:
+						def ensure[A](fa: F[A])(e: E)(f: A => Boolean): F[A]
+					}
+	
+
+		MonadError is defined in terms of two type parameters:
+		• F is the type of the monad;
+		• E is the type of error contained within F.
+		
+		To demonstrate how these parameters fit together, here’s an example where
+		we instantiate the type class for Either:
 	*/
-  // Choose error-handling behaviour based on type:
-  def handleError(error: LoginError): Unit =
-    error match {
-      case UserNotFound(u) =>
-        println(s"User not found: $u")
-      case PasswordIncorrect(u) =>
-        println(s"Password incorrect: $u")
-      case UnexpectedError =>
-        println(s"Unexpected error")
-    }                                             //> handleError: (error: book.ch4.d_error_handling.LoginError)Unit
-  val result1: LoginResult = User("dave", "passw0rd").asRight
-                                                  //> result1  : book.ch4.d_error_handling.LoginResult = Right(User(dave,passw0rd
-                                                  //| ))
-  val result2: LoginResult = UserNotFound("dave").asLeft
-                                                  //> result2  : book.ch4.d_error_handling.LoginResult = Left(UserNotFound(dave))
-                                                  //| 
-  result1.fold(handleError, println)              //> User(dave,passw0rd)
-  result2.fold(handleError, println)              //> User not found: dave
+		import cats.MonadError
+		import cats.instances.either._ // for MonadError
+		
+		type ErrorOr[A] = Either[String, A]
+		
+		val monadError = MonadError[ErrorOr, String]
+                                                  //> monadError  : cats.MonadError[book.ch4.d_error_handling.ErrorOr,String] = c
+                                                  //| ats.instances.EitherInstances$$anon$1@77b52d12
+
+	/*
+			ApplicativeError
+			
+			In reality, MonadError extends another type class called ApplicativeError.
+			However, we won’t encounter Applicatives until Chapter
+			6. The semantics are the same for each type class so we can ignore
+			this detail for now.
+		
+		4.5.2 Raising and Handling Errors
+
+		The two most important methods of MonadError are raiseError and handleError.
+		raiseError is like the pure method for Monad except that it creates
+		an instance representing a failure:
+	*/
+	
+		val success = monadError.pure(42) //> success  : book.ch4.d_error_handling.ErrorOr[Int] = Right(42)
+
+		val failure = monadError.raiseError("Badness")
+                                                  //> failure  : book.ch4.d_error_handling.ErrorOr[Nothing] = Left(Badness)
+
+	/*
+		handleError is the compliment of raiseError. It allows us to consume an
+		error and (possibly) turn it into a success, similar to the recover method of
+		Future:
+	*/
+		
+		monadError.handleError(failure) {
+			case "Badness" =>
+				monadError.pure("It's ok")
+			case other =>
+				monadError.raiseError("It's not ok")
+		}                                 //> res0: book.ch4.d_error_handling.ErrorOr[book.ch4.d_error_handling.ErrorOr[S
+                                                  //| tring]] = Right(Right(It's ok))
+
+	/*
+		There is also a third useful method called ensure that implements filterlike
+		behaviour. We test the value of a successful monad with a predicate and
+		specify an error to raise if the predicate returns false:
+	*/
+		import cats.syntax.either._ // for asRight
+
+		monadError.ensure(success)("Number too low!")(_ > 1000)
+                                                  //> res1: book.ch4.d_error_handling.ErrorOr[Int] = Left(Number too low!)
+
+	/*
+		Cats provides syntax for raiseError and handleError
+		via cats.syntax.applicativeError and ensure via
+		cats.syntax.monadError:
+	*/
+
+		import cats.syntax.applicative._ // for pure
+		import cats.syntax.applicativeError._ // for raiseError etc
+		import cats.syntax.monadError._ // for ensure
+
+		val success1 = 42.pure[ErrorOr]   //> success1  : book.ch4.d_error_handling.ErrorOr[Int] = Right(42)
+
+		val failure1 = "Badness".raiseError[ErrorOr, Int]
+                                                  //> failure1  : book.ch4.d_error_handling.ErrorOr[Int] = Left(Badness)
+
+
+		success1.ensure("Number to low!")(_ > 1000)
+                                                  //> res2: Either[String,Int] = Left(Number to low!)
+
+	
+	/*
+		There are other useful variants of these methods. See the source of
+		cats.MonadError and cats.ApplicativeError for more information.
+
+		4.5.3 Instances of MonadError
+
+		Cats provides instances of MonadError for numerous data types including
+		Either, Future, and Try. The instance for Either is customisable to any
+		error type, whereas the instances for Future and Try always represent errors
+		as Throwables:
+	*/
+	
+		import scala.util.Try
+		import cats.instances.try_._ // for MonadError
+
+		val exn: Throwable =
+			new RuntimeException("It's all gone wrong")
+                                                  //> exn  : Throwable = java.lang.RuntimeException: It's all gone wrong
+	
+		exn.raiseError[Try, Int]          //> res3: scala.util.Try[Int] = Failure(java.lang.RuntimeException: It's all go
+                                                  //| ne wrong)
+
+	/*
+		4.5.4 Exercise: Abstracting - not found
+	*/
 }
