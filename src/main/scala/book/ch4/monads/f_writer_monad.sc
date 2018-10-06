@@ -1,4 +1,4 @@
-package book.ch4
+package book.ch4.monads
 
 object f_writer_monad {
 /*
@@ -61,7 +61,8 @@ object f_writer_monad {
 	
 		type Logged[A] = Writer[Vector[String], A]
 	
-		123.pure[Logged]                  //> res1: book.ch4.f_writer_monad.Logged[Int] = WriterT((Vector(),123))
+		123.pure[Logged]                  //> res1: book.ch4.monads.f_writer_monad.Logged[Int] = WriterT((Vector(),123))
+                                                  //| 
 
 	/*
 		If we have a log and no result we can create a Writer[Unit] using the tell
@@ -247,7 +248,8 @@ object f_writer_monad {
 
 //		type Logged[A] = Writer[Vector[String], A]
 
-		42.pure[Logged]                   //> res11: book.ch4.f_writer_monad.Logged[Int] = WriterT((Vector(),42))
+		42.pure[Logged]                   //> res11: book.ch4.monads.f_writer_monad.Logged[Int] = WriterT((Vector(),42))
+                                                  //| 
 
 	/*
 		We’ll import the tell syntax as well:
@@ -280,7 +282,7 @@ object f_writer_monad {
 								}
 				_ <- Vector(s"fact $n $ans").tell
 
-			} yield ans               //> factorial2: (n: Int)book.ch4.f_writer_monad.Logged[Int]
+			} yield ans               //> factorial2: (n: Int)book.ch4.monads.f_writer_monad.Logged[Int]
 	/*
 		When we call factorial, we now have to run the return value to extract the
 		log and our factorial:

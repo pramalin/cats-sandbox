@@ -1,4 +1,4 @@
-package book.ch3
+package book.ch3.functors
 
 	/*
 		7.6.1 Take Home Points

@@ -1,4 +1,4 @@
-package book.ch1
+package book.ch1.introduction
 
 object e_example_eq {
 	/*
@@ -149,9 +149,9 @@ object e_example_eq {
 				date1.getTime === date2.getTime
 			}                         //> dateEq  : cats.Eq[java.util.Date] = cats.kernel.Eq$$anon$106@3abbfa04
 			
-		val x = new Date() // now         //> x  : java.util.Date = Wed Oct 03 11:55:54 EDT 2018
+		val x = new Date() // now         //> x  : java.util.Date = Sat Oct 06 15:22:33 EDT 2018
 		val y = new Date() // a bit later than now
-                                                  //> y  : java.util.Date = Wed Oct 03 11:55:54 EDT 2018
+                                                  //> y  : java.util.Date = Sat Oct 06 15:22:33 EDT 2018
 		
 		x === x                           //> res9: Boolean = true
 
@@ -199,18 +199,20 @@ object e_example_eq {
 				(cat1.name === cat2.name ) &&
 				(cat1.age === cat2.age ) &&
 				(cat1.color === cat2.color)
-			}                         //> catEqual  : cats.Eq[book.ch1.e_example_eq.Cat] = cats.kernel.Eq$$anon$106@c
-                                                  //| b644e
+			}                         //> catEqual  : cats.Eq[book.ch1.introduction.e_example_eq.Cat] = cats.kernel.E
+                                                  //| q$$anon$106@cb644e
 
 	/*
 		Finally, we test things out in a sample applica􀦞on:
 	*/
 
 		val cat1 = Cat("Garfield", 38, "orange and black")
-                                                  //> cat1  : book.ch1.e_example_eq.Cat = Cat(Garfield,38,orange and black)
+                                                  //> cat1  : book.ch1.introduction.e_example_eq.Cat = Cat(Garfield,38,orange and
+                                                  //|  black)
 
 		val cat2 = Cat("Heathcliff", 32, "orange and black")
-                                                  //> cat2  : book.ch1.e_example_eq.Cat = Cat(Heathcliff,32,orange and black)
+                                                  //> cat2  : book.ch1.introduction.e_example_eq.Cat = Cat(Heathcliff,32,orange a
+                                                  //| nd black)
  
  		cat1 === cat2                     //> res11: Boolean = false
 
@@ -218,10 +220,10 @@ object e_example_eq {
 
 		import cats.instances.option._ // for Eq
 
-		val optionCat1 = Option(cat1)     //> optionCat1  : Option[book.ch1.e_example_eq.Cat] = Some(Cat(Garfield,38,oran
-                                                  //| ge and black))
+		val optionCat1 = Option(cat1)     //> optionCat1  : Option[book.ch1.introduction.e_example_eq.Cat] = Some(Cat(Gar
+                                                  //| field,38,orange and black))
 
-		val optionCat2 = Option.empty[Cat]//> optionCat2  : Option[book.ch1.e_example_eq.Cat] = None
+		val optionCat2 = Option.empty[Cat]//> optionCat2  : Option[book.ch1.introduction.e_example_eq.Cat] = None
 
 		optionCat1 === optionCat2         //> res13: Boolean = false
 

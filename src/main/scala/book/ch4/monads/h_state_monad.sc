@@ -1,4 +1,4 @@
-package book.ch4
+package book.ch4.monads
 
 object h_state_monad {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet

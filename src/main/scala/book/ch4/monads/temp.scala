@@ -1,4 +1,4 @@
-package book.ch4
+package book.ch4.monads
 		import cats.syntax.either._
 		
 object temp extends App {

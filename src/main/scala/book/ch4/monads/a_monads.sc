@@ -1,4 +1,4 @@
-package book.ch4
+package book.ch4.monads
 
 object a_monads {
 

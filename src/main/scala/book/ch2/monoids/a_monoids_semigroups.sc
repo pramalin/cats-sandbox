@@ -1,4 +1,4 @@
-package book.ch2
+package book.ch2.monoids
 
 object a_monoids_semigroups {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
@@ -192,8 +192,8 @@ object a_monoids_semigroups {
 			new Monoid[Boolean] {
 				def combine(a: Boolean, b: Boolean) = a && b
 				def empty = true
-		}                                 //> booleanAndMonoid  : cats.Monoid[Boolean] = book.ch2.a_monoids_semigroups$$a
-                                                  //| non$2@7a0ac6e3
+		}                                 //> booleanAndMonoid  : cats.Monoid[Boolean] = book.ch2.monoids.a_monoids_semig
+                                                  //| roups$$anon$2@7a0ac6e3
 		
 		/*
 		Second, we have or with operator || and identity false:
@@ -203,8 +203,8 @@ object a_monoids_semigroups {
 			new Monoid[Boolean] {
 				def combine(a: Boolean, b: Boolean) = a || b
 				def empty = false
-			}                         //> booleanOrMonoid  : cats.Monoid[Boolean] = book.ch2.a_monoids_semigroups$$an
-                                                  //| on$3@71be98f5
+			}                         //> booleanOrMonoid  : cats.Monoid[Boolean] = book.ch2.monoids.a_monoids_semigr
+                                                  //| oups$$anon$3@71be98f5
 	
 		/*
 		Third, we have exclusive or with identity false:
@@ -216,8 +216,8 @@ object a_monoids_semigroups {
 					(a && !b) || (!a && b)
 		
 				def empty = false
-		}                                 //> booleanEitherMonoid  : cats.Monoid[Boolean] = book.ch2.a_monoids_semigroups
-                                                  //| $$anon$4@6fadae5d
+		}                                 //> booleanEitherMonoid  : cats.Monoid[Boolean] = book.ch2.monoids.a_monoids_se
+                                                  //| migroups$$anon$4@6fadae5d
 	
 		/*
 			Finally, we have exclusive nor (the negation of exclusive or) with identity true:
@@ -229,8 +229,8 @@ object a_monoids_semigroups {
 					(!a || b) && (a || !b)
 		
 				def empty = true
-		}                                 //> booleanXnorMonoid  : cats.Monoid[Boolean] = book.ch2.a_monoids_semigroups$$
-                                                  //| anon$5@17f6480
+		}                                 //> booleanXnorMonoid  : cats.Monoid[Boolean] = book.ch2.monoids.a_monoids_semi
+                                                  //| groups$$anon$5@17f6480
 
 	/*
 		Showing that the identity law holds in each case is straigh􀁿orward. Similarly
@@ -269,8 +269,8 @@ object a_monoids_semigroups {
 	implicit val intMonoid: Monoid[Int] = new Monoid[Int] {
 		def combine(a: Int, b: Int) = a + b
 		def empty = 0
-	}                                         //> intMonoid  : cats.Monoid[Int] = book.ch2.a_monoids_semigroups$$anon$1@96532
-                                                  //| d6
+	}                                         //> intMonoid  : cats.Monoid[Int] = book.ch2.monoids.a_monoids_semigroups$$anon
+                                                  //| $1@96532d6
 
 	import cats.instances.set._ // for Set
 	
@@ -484,7 +484,7 @@ object a_monoids_semigroups {
 		
 		def add4[A: Monoid](items: List[A]): A =
 			items.foldLeft(Monoid[A].empty)(_ |+| _)
-                                                  //> add4: [A](items: List[A])(implicit evidence$1: cats.Monoid[A])A
+                                                  //> add4: [A](items: List[A])(implicit evidence$2: cats.Monoid[A])A
 		/*
 			We can use this code to add values of type Int and Option[Int] as requested:
 		*/
@@ -543,8 +543,8 @@ object a_monoids_semigroups {
 				)
 
 			def empty = Order(0, 0)
-		}                                 //> monoid  : cats.Monoid[book.ch2.a_monoids_semigroups.Order] = book.ch2.a_mo
-                                                  //| noids_semigroups$$anon$8@69ea3742
+		}                                 //> monoid  : cats.Monoid[book.ch2.monoids.a_monoids_semigroups.Order] = book.
+                                                  //| ch2.monoids.a_monoids_semigroups$$anon$8@69ea3742
 
 	/*
     ---------------------------------------------------------------

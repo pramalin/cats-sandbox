@@ -1,4 +1,4 @@
-package book.ch3
+package book.ch3.functors
 
 object a_functors {
 

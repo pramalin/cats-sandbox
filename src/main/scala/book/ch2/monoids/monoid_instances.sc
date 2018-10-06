@@ -1,4 +1,4 @@
-package book.ch2
+package book.ch2.monoids
 
 object monoid_instances {
   import cats.Monoid

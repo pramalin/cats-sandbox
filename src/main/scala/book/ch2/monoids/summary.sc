@@ -1,4 +1,5 @@
-package book.ch2
+package book.ch2.monoids
+
 import cats.Monoid
 import cats.instances.string._ // for Monoid
 import cats.syntax.semigroup._ // for |+|
@@ -30,7 +31,7 @@ object summary {
     (implicit monoid: Monoid[A]): A =
        values.foldRight(monoid.empty)(_ |+| _)    //> addAll: [A](values: List[A])(implicit monoid: cats.Monoid[A])A
   
-  addAll(List(1, 2, 3))                           //> res5: Int = 6
-  addAll(List(None, Some(1), Some(2)))            //> res6: Option[Int] = Some(3)
+  addAll(List(1, 2, 3))
+  addAll(List(None, Some(1), Some(2)))
 
 }

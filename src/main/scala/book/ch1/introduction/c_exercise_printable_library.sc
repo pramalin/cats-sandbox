@@ -1,4 +1,4 @@
-package book.ch1
+package book.ch1.introduction
 
 object c_exercise_printable_library {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
@@ -120,9 +120,9 @@ object c_exercise_printable_library {
 					val color = Printable.format(cat.color)
 					s"$name is a $age year-old $color cat."
 				}
-			}                         //> catPrintable  : book.ch1.c_exercise_printable_library.Printable[book.ch1.c_
-                                                  //| exercise_printable_library.Cat] = book.ch1.c_exercise_printable_library$$an
-                                                  //| on$3@27f674d
+			}                         //> catPrintable  : book.ch1.introduction.c_exercise_printable_library.Printabl
+                                                  //| e[book.ch1.introduction.c_exercise_printable_library.Cat] = book.ch1.introd
+                                                  //| uction.c_exercise_printable_library$$anon$3@27f674d
 
 	/*
 		Finally, we use the type class by bringing the relevant instances into scope
@@ -132,8 +132,8 @@ object c_exercise_printable_library {
 	*/
 
 			val cat = Cat("Garfield", 38, "ginger and black")
-                                                  //> cat  : book.ch1.c_exercise_printable_library.Cat = Cat(Garfield,38,ginger a
-                                                  //| nd black)
+                                                  //> cat  : book.ch1.introduction.c_exercise_printable_library.Cat = Cat(Garfiel
+                                                  //| d,38,ginger and black)
 			Printable.print(cat)      //> Garfield is a 38 year-old ginger and black cat.
 
 	/*

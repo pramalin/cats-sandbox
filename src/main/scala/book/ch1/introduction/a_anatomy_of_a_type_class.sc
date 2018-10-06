@@ -1,7 +1,7 @@
-package book.ch1
+package book.ch1.introduction
 
 object a_anatomy_of_a_type_class {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+  println("Welcome to the Scala worksheet")
 	/*
 		Chapter 1
 
@@ -107,8 +107,6 @@ object a_anatomy_of_a_type_class {
 */
 			import JsonWriterInstances._
 			Json.toJson(Person("Dave", "dave@example.com"))
-                                                  //> res0: book.ch1.a_anatomy_of_a_type_class.Json = JsObject(Map(name -> JsStri
-                                                  //| ng(Dave), email -> JsString(dave@example.com)))
 /*
 		The compiler spots that we’ve called the toJson method without providing
 		the implicit parameters. It tries to fix this by searching for type class instances
@@ -116,8 +114,6 @@ object a_anatomy_of_a_type_class {
 */
 
 				Json.toJson(Person("Dave", "dave@example.com"))(personWriter)
-                                                  //> res1: book.ch1.a_anatomy_of_a_type_class.Json = JsObject(Map(name -> JsStri
-                                                  //| ng(Dave), email -> JsString(dave@example.com)))
 /*
 		Interface Syntax
 	
@@ -138,16 +134,12 @@ object a_anatomy_of_a_type_class {
 		import JsonWriterInstances._
 		import JsonSyntax._
 		Person("Dave", "dave@example.com").toJson
-                                                  //> res2: book.ch1.a_anatomy_of_a_type_class.Json = JsObject(Map(name -> JsStri
-                                                  //| ng(Dave), email -> JsString(dave@example.com)))
 /*
 		Again, the compiler searches for candidates for the implicit parameters and
 		fills them in for us:
 */
 	
 		Person("Dave", "dave@example.com").toJson(personWriter)
-                                                  //> res3: book.ch1.a_anatomy_of_a_type_class.Json = JsObject(Map(name -> JsStri
-                                                  //| ng(Dave), email -> JsString(dave@example.com)))
 /*
 		The implicitly Method
 
@@ -155,14 +147,13 @@ object a_anatomy_of_a_type_class {
 		Its definition is very simple:
 */
 		def implicitly[A](implicit value: A): A =
-			value                     //> implicitly: [A](implicit value: A)A
+			value
 /*
 		We can use implicitly to summon any value from implicit scope. We provide
 		the type we want and implicitly does the rest:
 */
 		import JsonWriterInstances._
-		implicitly[JsonWriter[String]]    //> res4: book.ch1.a_anatomy_of_a_type_class.JsonWriter[String] = book.ch1.a_an
-                                                  //| atomy_of_a_type_class$JsonWriterInstances$2$$anon$1@6df97b55
+		implicitly[JsonWriter[String]]
 
 /*
 		Most type classes in Cats provide other means to summon instances. However,

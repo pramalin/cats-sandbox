@@ -1,4 +1,4 @@
-package book.ch1
+package book.ch1.introduction
 
 object d_meet_cats {
 
@@ -131,8 +131,8 @@ object d_meet_cats {
 			new Show[Date] {
 				def show(date: Date): String =
 					s"${date.getTime}ms since the epoch."
-			}                         //> dateShow  : cats.Show[java.util.Date] = book.ch1.d_meet_cats$$anon$1@327471
-                                                  //| b5
+			}                         //> dateShow  : cats.Show[java.util.Date] = book.ch1.introduction.d_meet_cats$$
+                                                  //| anon$1@327471b5
 	
 	/*
 		However, Cats also provides a couple of convenient methods to simplify the
@@ -203,8 +203,8 @@ object d_meet_cats {
 			val age = cat.age.show
 			val color = cat.color.show
 			s"$name is a $age year-old $color cat."
-		}                                 //> catShow  : cats.Show[book.ch1.d_meet_cats.Cat] = cats.Show$$anon$1@4909b8da
-                                                  //| 
+		}                                 //> catShow  : cats.Show[book.ch1.introduction.d_meet_cats.Cat] = cats.Show$$an
+                                                  //| on$1@4909b8da
 	
 		/*
 			Finally, we use the Show interface syntax to print our instance of Cat:

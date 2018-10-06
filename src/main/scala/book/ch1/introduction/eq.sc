@@ -1,4 +1,4 @@
-package book.ch1
+package book.ch1.introduction
 
 object eq {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
@@ -7,7 +7,7 @@ object eq {
 
   import cats.Eq
   import cats.instances.int._ // for Eq
-  val eqInt = Eq[Int]                             //> eqInt  : cats.kernel.Eq[Int] = cats.kernel.instances.IntOrder@643b1d11
+  val eqInt = Eq[Int]                             //> eqInt  : cats.kernel.Eq[Int] = cats.kernel.instances.IntOrder@27efef64
 
   eqInt.eqv(123, 123)                             //> res0: Boolean = true
   eqInt.eqv(123, 234)                             //> res1: Boolean = false
@@ -41,10 +41,10 @@ object eq {
   implicit val dateEq: Eq[Date] =
     Eq.instance[Date] { (date1, date2) =>
       date1.getTime === date2.getTime
-    }                                             //> dateEq  : cats.Eq[java.util.Date] = cats.kernel.Eq$$anon$97@6767c1fc
+    }                                             //> dateEq  : cats.Eq[java.util.Date] = cats.kernel.Eq$$anon$106@31ef45e3
 
-  val x = new Date() // now                       //> x  : java.util.Date = Wed Sep 12 08:55:04 EDT 2018
-  val y = new Date() // a bit later than now      //> y  : java.util.Date = Wed Sep 12 08:55:04 EDT 2018
+  val x = new Date() // now                       //> x  : java.util.Date = Sat Oct 06 15:22:42 EDT 2018
+  val y = new Date() // a bit later than now      //> y  : java.util.Date = Sat Oct 06 15:22:42 EDT 2018
   x === x                                         //> res8: Boolean = true
   x === y                                         //> res9: Boolean = false
 }

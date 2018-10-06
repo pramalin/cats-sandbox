@@ -1,4 +1,4 @@
-package book.ch4
+package book.ch4.monads.monads
 
 object i_custom_monad {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
@@ -29,8 +29,8 @@ object i_custom_monad {
 				case Some(Left(a1)) => tailRecM(a1)(fn)
 				case Some(Right(b)) => Some(b)
 			}
-		}                                 //> optionMonad  : cats.Monad[Option] = book.ch4.i_custom_monad$$anon$1@59a6e353
-                                                  //| 
+		}                                 //> optionMonad  : cats.Monad[Option] = book.ch4.monads.monads.i_custom_monad$$a
+                                                  //| non$1@59a6e353
 
 	/*
 		The tailRecM method is an optimisation used in Cats to limit the amount
@@ -59,11 +59,12 @@ object i_custom_monad {
 		final case class Leaf[A](value: A) extends Tree[A]
 
 		def branch[A](left: Tree[A], right: Tree[A]): Tree[A] =
-			Branch(left, right)       //> branch: [A](left: book.ch4.i_custom_monad.Tree[A], right: book.ch4.i_custom
-                                                  //| _monad.Tree[A])book.ch4.i_custom_monad.Tree[A]
+			Branch(left, right)       //> branch: [A](left: book.ch4.monads.monads.i_custom_monad.Tree[A], right: boo
+                                                  //| k.ch4.monads.monads.i_custom_monad.Tree[A])book.ch4.monads.monads.i_custom_
+                                                  //| monad.Tree[A]
 	
 		def leaf[A](value: A): Tree[A] =
-			Leaf(value)               //> leaf: [A](value: A)book.ch4.i_custom_monad.Tree[A]
+			Leaf(value)               //> leaf: [A](value: A)book.ch4.monads.monads.i_custom_monad.Tree[A]
 
 	/*
 		Verify that the code works on instances of Branch and Leaf, and that the
@@ -187,8 +188,8 @@ object i_custom_monad {
 
 				loop(List(func(arg)), Nil).head
 			}
-		}                                 //> treeMonad  : cats.Monad[book.ch4.i_custom_monad.Tree] = book.ch4.i_custom_m
-                                                  //| onad$$anon$2@7a0ac6e3
+		}                                 //> treeMonad  : cats.Monad[book.ch4.monads.monads.i_custom_monad.Tree] = book.
+                                                  //| ch4.monads.monads.i_custom_monad$$anon$2@7a0ac6e3
 
 	/*
 		Regardless of which version of tailRecM we define, we can use our Monad to
@@ -199,8 +200,8 @@ object i_custom_monad {
 
 		branch(leaf(100), leaf(200)).
 			flatMap(x => branch(leaf(x - 1), leaf(x + 1)))
-                                                  //> res0: book.ch4.i_custom_monad.Tree[Int] = Branch(Branch(Leaf(99),Leaf(101))
-                                                  //| ,Branch(Leaf(199),Leaf(201)))
+                                                  //> res0: book.ch4.monads.monads.i_custom_monad.Tree[Int] = Branch(Branch(Leaf(
+                                                  //| 99),Leaf(101)),Branch(Leaf(199),Leaf(201)))
 
 	/*
 		We can also transform Trees using for comprehensions:
@@ -210,9 +211,9 @@ object i_custom_monad {
 			a <- branch(leaf(100), leaf(200))
 			b <- branch(leaf(a - 10), leaf(a + 10))
 			c <- branch(leaf(b - 1), leaf(b + 1))
-		} yield c                         //> res1: book.ch4.i_custom_monad.Tree[Int] = Branch(Branch(Branch(Leaf(89),Lea
-                                                  //| f(91)),Branch(Leaf(109),Leaf(111))),Branch(Branch(Leaf(189),Leaf(191)),Bran
-                                                  //| ch(Leaf(209),Leaf(211))))
+		} yield c                         //> res1: book.ch4.monads.monads.i_custom_monad.Tree[Int] = Branch(Branch(Branc
+                                                  //| h(Leaf(89),Leaf(91)),Branch(Leaf(109),Leaf(111))),Branch(Branch(Leaf(189),L
+                                                  //| eaf(191)),Branch(Leaf(209),Leaf(211))))
 
 	/*
 		The monad for Option provides fail-fast semantics. The monad for List provides

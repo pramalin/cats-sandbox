@@ -1,4 +1,4 @@
-package book.ch1
+package book.ch1.introduction
 
 object b_working_with_implicits {
 
@@ -72,7 +72,8 @@ object b_working_with_implicits {
 		type JsonWriter[String]:
 	*/
 
-			Json.toJson("A string!")  //> res0: book.ch1.b_working_with_implicits.Json = JsString(A string!)
+			Json.toJson("A string!")  //> res0: book.ch1.introduction.b_working_with_implicits.Json = JsString(A stri
+                                                  //| ng!)
 	
 	/*
 		The compiler searches for candidate instances in the implicit scope at the call
@@ -172,15 +173,17 @@ object b_working_with_implicits {
 						case Some(aValue) => writer.write(aValue)
 						case None => JsNull
 			}
-		}                                 //> optionWriter: [A](implicit writer: book.ch1.b_working_with_implicits.JsonWr
-                                                  //| iter[A])book.ch1.b_working_with_implicits.JsonWriter[Option[A]]
+		}                                 //> optionWriter: [A](implicit writer: book.ch1.introduction.b_working_with_imp
+                                                  //| licits.JsonWriter[A])book.ch1.introduction.b_working_with_implicits.JsonWri
+                                                  //| ter[Option[A]]
 	/*
 		This method constructs a JsonWriter for Option[A] by relying on an implicit
 		parameter to fill in the A-specific functionality. When the compiler sees an
 		expression like this:
 	*/
 	
-		Json.toJson(Option("A string"))   //> res1: book.ch1.b_working_with_implicits.Json = JsString(A string)
+		Json.toJson(Option("A string"))   //> res1: book.ch1.introduction.b_working_with_implicits.Json = JsString(A stri
+                                                  //| ng)
 
 	/*
 		it searches for an implicit JsonWriter[Option[String]]. It finds the implicit
@@ -188,7 +191,8 @@ object b_working_with_implicits {
 	*/
 		
 		Json.toJson(Option("A string"))(optionWriter[String])
-                                                  //> res2: book.ch1.b_working_with_implicits.Json = JsString(A string)
+                                                  //> res2: book.ch1.introduction.b_working_with_implicits.Json = JsString(A stri
+                                                  //| ng)
 	
 	/*
 		and recursively searches for a JsonWriter[String] to use as the parameter
@@ -196,7 +200,8 @@ object b_working_with_implicits {
 	*/
 		
 		Json.toJson(Option("A string"))(optionWriter(stringWriter))
-                                                  //> res3: book.ch1.b_working_with_implicits.Json = JsString(A string)
+                                                  //> res3: book.ch1.introduction.b_working_with_implicits.Json = JsString(A stri
+                                                  //| ng)
 		
 	/*
 		In this way, implicit resolution becomes a search through the space of possible
