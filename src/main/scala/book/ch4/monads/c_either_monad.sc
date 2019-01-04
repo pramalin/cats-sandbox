@@ -219,7 +219,7 @@ object c_either_monad {
     b4 <- 0.asRight[String]
     c4 <- if (b4 == 0) "DIV0".asLeft[Int]
     else (a4 / b4).asRight[String]
-  } yield c4 * 100                                //> res19: scala.util.Either[String,Int] = Left(DIV0)
+  } yield c4 * 100
 
 	/*
 		When using Either for error handling, we need to determine what type we
@@ -264,17 +264,14 @@ object c_either_monad {
 	        println(s"Password incorrect: $u")
 	      case UnexpectedError =>
 	        println(s"Unexpected error")
-	    }                                     //> handleError: (error: book.ch4.c_either_monad.LoginError)Unit
+	    }
 	  val result1: LoginResult = User("dave", "passw0rd").asRight
-                                                  //> result1  : book.ch4.c_either_monad.LoginResult = Right(User(dave,passw0rd))
-                                                  //| 
 	
 	  val result2: LoginResult = UserNotFound("dave").asLeft
-                                                  //> result2  : book.ch4.c_either_monad.LoginResult = Left(UserNotFound(dave))
 	
-	  result1.fold(handleError, println)      //> User(dave,passw0rd)
+	  result1.fold(handleError, println)
 	
-	  result2.fold(handleError, println)      //> User not found: dave
+	  result2.fold(handleError, println)
 	
 
 	/*

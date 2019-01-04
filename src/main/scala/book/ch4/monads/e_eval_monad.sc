@@ -29,11 +29,11 @@ object e_eval_monad {
 			println("Computing X")
 			math.random
 		}                                 //> Computing X
-                                                  //| x  : Double = 0.4334073719197604
+                                                  //| x  : Double = 0.10856636918475215
 
-		x // first access                 //> res0: Double = 0.4334073719197604
+		x // first access                 //> res0: Double = 0.10856636918475215
 
-		x // second access                //> res1: Double = 0.4334073719197604
+		x // second access                //> res1: Double = 0.10856636918475215
 
 
 	/*
@@ -47,10 +47,10 @@ object e_eval_monad {
 		}                                 //> y: => Double
 
 		y // first access                 //> Computing Y
-                                                  //| res2: Double = 0.26221980015218505
+                                                  //| res2: Double = 0.5692279251362812
 
 		y // second access                //> Computing Y
-                                                  //| res3: Double = 0.01750241326916835
+                                                  //| res3: Double = 0.5350405895319544
 
 
 	/*
@@ -65,9 +65,9 @@ object e_eval_monad {
 		}                                 //> z: => Double = <lazy>
 
 		z // first access                 //> Computing Z
-                                                  //| res4: Double = 0.8395253272353052
+                                                  //| res4: Double = 0.4081866872885713
 
-		z // second access                //> res5: Double = 0.8395253272353052
+		z // second access                //> res5: Double = 0.4081866872885713
 
 	/*
 		4.6.2 Eval’s Models of Evaluation
@@ -79,7 +79,7 @@ object e_eval_monad {
 		import cats.Eval
 		
 		val now = Eval.now(math.random + 1000)
-                                                  //> now  : cats.Eval[Double] = Now(1000.7242783415551)
+                                                  //> now  : cats.Eval[Double] = Now(1000.8337501610768)
 
 		val later = Eval.later(math.random + 2000)
                                                   //> later  : cats.Eval[Double] = cats.Later@69d9c55
@@ -91,11 +91,11 @@ object e_eval_monad {
 		We can extract the result of an Eval using its value method:
 	*/
 	
-		now.value                         //> res6: Double = 1000.7242783415551
+		now.value                         //> res6: Double = 1000.8337501610768
 
-		later.value                       //> res7: Double = 2000.6793744664312
+		later.value                       //> res7: Double = 2000.7983335437038
 
-		always.value                      //> res8: Double = 3000.5348500629066
+		always.value                      //> res8: Double = 3000.268549504238
 
 
 	/*
@@ -108,11 +108,11 @@ object e_eval_monad {
 			println("Computing X")
 			math.random
 		}                                 //> Computing X
-                                                  //| x1  : cats.Eval[Double] = Now(0.01596124300494206)
+                                                  //| x1  : cats.Eval[Double] = Now(0.4529911852104175)
 
-		x1.value // first access          //> res9: Double = 0.01596124300494206
+		x1.value // first access          //> res9: Double = 0.4529911852104175
 
-		x1.value // second access         //> res10: Double = 0.01596124300494206
+		x1.value // second access         //> res10: Double = 0.4529911852104175
 
 	/*
 		Eval.always captures a lazy computation, similar to a def:
@@ -124,10 +124,10 @@ object e_eval_monad {
 		}                                 //> y1  : cats.Eval[Double] = cats.Always@59e84876
 
 		y1.value // first access          //> Computing Y
-                                                  //| res11: Double = 0.8383787745329692
+                                                  //| res11: Double = 0.3625276158168532
 
 		y1.value // second access         //> Computing Y
-                                                  //| res12: Double = 0.4812701797788299
+                                                  //| res12: Double = 0.6002322183600153
 	
 	/*
 		Finally, Eval.later captures a lazy, memoized computation, similar to a lazy
@@ -140,9 +140,9 @@ object e_eval_monad {
 		}                                 //> z1  : cats.Eval[Double] = cats.Later@39fb3ab6
 
 		z1.value // first access          //> Computing Z
-                                                  //| res13: Double = 0.792505615534007
+                                                  //| res13: Double = 0.12467143985138285
 
-		z1.value // second access         //> res14: Double = 0.792505615534007
+		z1.value // second access         //> res14: Double = 0.12467143985138285
 
 
 	/*

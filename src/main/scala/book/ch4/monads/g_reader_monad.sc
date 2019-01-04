@@ -1,7 +1,7 @@
 package book.ch4.monads
 
 object g_reader_monad {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+  println("Welcome to the Scala worksheet")       //> 
 	/*
 		4.8 The Reader Monad
 	
@@ -24,15 +24,13 @@ object g_reader_monad {
 		case class Cat(name: String, favoriteFood: String)
 
 		val catName: Reader[Cat, String] =
-			Reader(cat => cat.name)   //> catName  : cats.data.Reader[book.ch4.g_reader_monad.Cat,String] = Kleisli(bo
-                                                  //| ok.ch4.g_reader_monad$$$Lambda$8/191382150@3abbfa04)
+			Reader(cat => cat.name)
 
 	/*
 		We can extract the function again using the Reader's run method and call it
 		using apply as usual:
 	*/
 		catName.run(Cat("Garfield", "lasagne"))
-                                                  //> res0: cats.Id[String] = Garfield
 
 	/*
 		So far so simple, but what advantage do Readers give us over the raw func-
@@ -49,10 +47,7 @@ object g_reader_monad {
 	*/
 		val greetKitty: Reader[Cat, String] =
 			catName.map(name => s"Hello ${name}")
-                                                  //> greetKitty  : cats.data.Reader[book.ch4.g_reader_monad.Cat,String] = Kleisl
-                                                  //| i(cats.data.Kleisli$$Lambda$11/795372831@3fee9989)
 		greetKitty.run(Cat("Heathcliff", "junk food"))
-                                                  //> res1: cats.Id[String] = Hello Heathcliff
 
 	/*
 		The flatMap method is more interesting. It allows us to combine readers that
@@ -62,21 +57,16 @@ object g_reader_monad {
 	
 		val feedKitty: Reader[Cat, String] =
 			Reader(cat => s"Have a nice bowl of ${cat.favoriteFood}")
-                                                  //> feedKitty  : cats.data.Reader[book.ch4.g_reader_monad.Cat,String] = Kleisli
-                                                  //| (book.ch4.g_reader_monad$$$Lambda$13/1454127753@27c20538)
 	
 		val greetAndFeed: Reader[Cat, String] =
 			for {
 				greet <- greetKitty
 				feed <- feedKitty
-			} yield s"$greet. $feed." //> greetAndFeed  : cats.data.Reader[book.ch4.g_reader_monad.Cat,String] = Klei
-                                                  //| sli(cats.data.Kleisli$$$Lambda$16/1555690610@cb644e)
+			} yield s"$greet. $feed."
 
 			greetAndFeed(Cat("Garfield", "lasagne"))
-                                                  //> res2: cats.Id[String] = Hello Garfield. Have a nice bowl of lasagne.
 
 			greetAndFeed(Cat("Heathcliff", "junk food"))
-                                                  //> res3: cats.Id[String] = Hello Heathcliff. Have a nice bowl of junk food.
 	
 	/*
 		4.8.3 Exercise: Hacking on Readers
@@ -133,15 +123,11 @@ object g_reader_monad {
 	
 		def findUsername(userId: Int): DbReader[Option[String]] =
 			Reader(db => db.usernames.get(userId))
-                                                  //> findUsername: (userId: Int)book.ch4.g_reader_monad.DbReader[Option[String]]
-                                                  //| 
 	
 		def checkPassword(
 					username: String,
 					password: String): DbReader[Boolean] =
 			Reader(db => db.passwords.get(username).contains(password))
-                                                  //> checkPassword: (username: String, password: String)book.ch4.g_reader_monad.
-                                                  //| DbReader[Boolean]
 
 	/*
 	  ---------------------------------------------------------------
@@ -177,8 +163,7 @@ object g_reader_monad {
 											}.getOrElse {
 												false.pure[DbReader]
 											}
-			} yield passwordOk        //> checkLogin: (userId: Int, password: String)book.ch4.g_reader_monad.DbReader
-                                                  //| [Boolean]
+			} yield passwordOk
 
 	/*
 	  ---------------------------------------------------------------
@@ -190,22 +175,19 @@ object g_reader_monad {
 			1 -> "dade",
 			2 -> "kate",
 			3 -> "margo"
-		)                                 //> users  : scala.collection.immutable.Map[Int,String] = Map(1 -> dade, 2 -> k
-                                                  //| ate, 3 -> margo)
+		)
 
 		val passwords = Map(
 			"dade" -> "zerocool",
 			"kate" -> "acidburn",
 			"margo" -> "secret"
-		)                                 //> passwords  : scala.collection.immutable.Map[String,String] = Map(dade -> ze
-                                                  //| rocool, kate -> acidburn, margo -> secret)
+		)
 
-		val db = Db(users, passwords)     //> db  : book.ch4.g_reader_monad.Db = Db(Map(1 -> dade, 2 -> kate, 3 -> margo)
-                                                  //| ,Map(dade -> zerocool, kate -> acidburn, margo -> secret))
+		val db = Db(users, passwords)
 
-		checkLogin(1, "zerocool").run(db) //> res4: cats.Id[Boolean] = true
+		checkLogin(1, "zerocool").run(db)
 
-		checkLogin(4, "davinci").run(db)  //> res5: cats.Id[Boolean] = false
+		checkLogin(4, "davinci").run(db)
 
 	/*
 		4.8.4 When to Use Readers?

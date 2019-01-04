@@ -76,17 +76,16 @@ object b_id_monad {
 
 		123 : Id[Int]                     //> res2: cats.Id[Int] = 123
 
-		List(1, 2, 3) : Id[List[Int]]     //> res3: cats.Id[List[Int]] = List(1, 2, 3)
+		List(1, 2, 3) : Id[List[Int]]
 
 	/*
 		Cats provides instances of various type classes for Id, including Functor and
 		Monad. These let us call map, flatMap, and pure passing in plain values:
   */
   
-		val a = Monad[Id].pure(3)         //> a  : cats.Id[Int] = 3
+		val a = Monad[Id].pure(3)
 
 		val b = Monad[Id].flatMap(a)(_ + 1)
-                                                  //> b  : cats.Id[Int] = 4
 
 		import cats.syntax.functor._ // for map
 		import cats.syntax.flatMap._ // for flatMap
@@ -94,7 +93,7 @@ object b_id_monad {
 		for {
 			x <- a
 			y <- b
-		} yield x + y                     //> res4: cats.Id[Int] = 7
+		} yield x + y
 
 	/*
 		The ability to abstract over monadic and non-monadic code is extremely powerful.
@@ -130,9 +129,9 @@ object b_id_monad {
 		initial value:
 	*/
 		def pure[A](value: A): Id[A] =
-			value                     //> pure: [A](value: A)cats.Id[A]
+			value
 
-		pure(123)                         //> res5: cats.Id[Int] = 123
+		pure(123)
 
 		/*
 			The map method takes a parameter of type Id[A], applies a function of type
@@ -141,9 +140,9 @@ object b_id_monad {
 		*/
 
 		def map[A, B](initial: Id[A])(func: A => B): Id[B] =
-			func(initial)             //> map: [A, B](initial: cats.Id[A])(func: A => B)cats.Id[B]
+			func(initial)
 
-		map(123)(_ * 2)                   //> res6: cats.Id[Int] = 246
+		map(123)(_ * 2)
 
 		/*
 			The final punch line is that, once we strip away the Id type constructors,
@@ -151,9 +150,9 @@ object b_id_monad {
 		*/
 
 		def flatMap[A, B](initial: Id[A])(func: A => Id[B]): Id[B] =
-			func(initial)             //> flatMap: [A, B](initial: cats.Id[A])(func: A => cats.Id[B])cats.Id[B]
+			func(initial)
 	
-		flatMap(123)(_ * 2)               //> res7: cats.Id[Int] = 246
+		flatMap(123)(_ * 2)
 
 	/*
 		

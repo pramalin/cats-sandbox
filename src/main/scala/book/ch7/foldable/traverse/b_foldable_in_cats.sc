@@ -1,4 +1,4 @@
-package book.ch7
+package book.ch7.foldable.traverse
 
 object b_foldable_in_cats {
   /*
@@ -14,7 +14,7 @@ object b_foldable_in_cats {
   import cats.Foldable
   import cats.instances.list._ // for Foldable
   val ints = List(1, 2, 3)                        //> ints  : List[Int] = List(1, 2, 3)
-  Foldable[List].foldLeft(ints, 0)(_ + _)         //> res0: Int = 6
+  Foldable[List].foldLeft(ints, 0)(_ + _)         //> res0: <error> = 6
 
   /*
 		Other sequences like Vector and Stream work in the same way. Here is an
@@ -23,7 +23,7 @@ object b_foldable_in_cats {
 
 	import cats.instances.option._ // for Foldable
   val maybeInt = Option(123)                      //> maybeInt  : Option[Int] = Some(123)
-  Foldable[Option].foldLeft(maybeInt, 10)(_ * _)  //> res1: Int = 1230
+  Foldable[Option].foldLeft(maybeInt, 10)(_ * _)  //> res1: <error> = 1230
 
   /*
 		7.1.4.1 Folding Right
@@ -80,9 +80,9 @@ object b_foldable_in_cats {
 		foldLeft. Many of these are facimiles of familiar methods from the standard
 		library: find, exists, forall, toList, isEmpty, nonEmpty, and so on:
 	*/
-  Foldable[Option].nonEmpty(Option(42))           //> res5: Boolean = true
+  Foldable[Option].nonEmpty(Option(42))           //> res5: <error> = true
 
-  Foldable[List].find(List(1, 2, 3))(_ % 2 == 0)  //> res6: Option[Int] = Some(2)
+  Foldable[List].find(List(1, 2, 3))(_ % 2 == 0)  //> res6: <error> = Some(2)
 
   /*
 		In addition to these familiar methods, Cats provides two methods that make
@@ -96,7 +96,7 @@ object b_foldable_in_cats {
 	*/
 		import cats.instances.int._ // for Monoid
 		Foldable[List].combineAll(List(1, 2, 3))
-                                                  //> res7: Int = 6
+                                                  //> res7: <error> = 6
 
 	/*
 		Alternatively, we can use foldMap to convert each Int to a String and concatenate
@@ -105,7 +105,7 @@ object b_foldable_in_cats {
 
   import cats.instances.string._ // for Monoid
   Foldable[List].foldMap(List(1, 2, 3))(_.toString)
-                                                  //> res8: String = 123
+                                                  //> res8: <error> = 123
 
   /*
 		Finally, we can compose Foldables to support deep traversal of nested sequences:
@@ -116,7 +116,7 @@ object b_foldable_in_cats {
                                                   //> ints2  : List[scala.collection.immutable.Vector[Int]] = List(Vector(1, 2, 3
                                                   //| ), Vector(4, 5, 6))
   (Foldable[List] compose Foldable[Vector]).combineAll(ints2)
-                                                  //> res9: Int = 21
+                                                  //> res9: <error> = 21
 
   /*
 		Every method in Foldable is available in syntax form via

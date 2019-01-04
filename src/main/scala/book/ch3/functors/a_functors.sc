@@ -193,12 +193,12 @@ object a_functors {
   
 		val func1: (Int => Double) =
 				(x: Int) => x.toDouble
-                                                  //> func1  : Int => Double = book.ch3.a_functors$$$Lambda$42/36202360@4e9ba398
-                                                  //| 
+                                                  //> func1  : Int => Double = book.ch3.functors.a_functors$$$Lambda$42/540642172
+                                                  //| @6fc6f14e
 	
 		val func2: (Double => Double) =
-			(y: Double) => y * 2      //> func2  : Double => Double = book.ch3.a_functors$$$Lambda$43/923219673@5f9d0
-                                                  //| 2cb
+			(y: Double) => y * 2      //> func2  : Double => Double = book.ch3.functors.a_functors$$$Lambda$43/131882
+                                                  //| 2808@6d7b4f4c
 		
 		(func1 map func2)(1) // composition using map
                                                   //> res3: Double = 2.0
@@ -223,7 +223,7 @@ object a_functors {
 			((x: Int) => x.toDouble).
 				map(x => x + 1).
 				map(x => x * 2).
-				map(x => x + "!") //> func  : Int => String = scala.Function1$$Lambda$44/54495403@536aaa8d
+				map(x => x + "!") //> func  : Int => String = scala.Function1$$Lambda$44/1260134048@27a8c74e
 
 		func(123)                         //> res6: String = 248.0!
 
@@ -385,11 +385,12 @@ object a_functors {
 		=> B to one that operates over a functor and has type F[A] => F[B]:
 	*/
 	
-		val func3 = (x: Int) => x + 1     //> func3  : Int => Int = book.ch3.a_functors$$$Lambda$52/648525677@4abdb505
+		val func3 = (x: Int) => x + 1     //> func3  : Int => Int = book.ch3.functors.a_functors$$$Lambda$52/1805013491@
+                                                  //| 38bc8ab5
 
 		val liftedFunc = Functor[Option].lift(func3)
-                                                  //> liftedFunc  : Option[Int] => Option[Int] = cats.Functor$$Lambda$53/3523597
-                                                  //| 70@e874448
+                                                  //> liftedFunc  : Option[Int] => Option[Int] = cats.Functor$$Lambda$53/6010081
+                                                  //| 04@7a9273a8
 
 		liftedFunc(Option(1))             //> res7: Option[Int] = Some(2)
 
@@ -409,13 +410,14 @@ object a_functors {
 		import cats.instances.function._ // for Functor
 		import cats.syntax.functor._ // for map
 
-		val func4 = (a: Int) => a + 1     //> func4  : Int => Int = book.ch3.a_functors$$$Lambda$54/699780352@60285225
-		val func5 = (a: Int) => a * 2     //> func5  : Int => Int = book.ch3.a_functors$$$Lambda$55/1897115967@45820e51
-                                                  //| 
-		val func6 = (a: Int) => a + "!"   //> func6  : Int => String = book.ch3.a_functors$$$Lambda$56/1121453612@6043cd
-                                                  //| 28
+		val func4 = (a: Int) => a + 1     //> func4  : Int => Int = book.ch3.functors.a_functors$$$Lambda$54/648525677@4
+                                                  //| abdb505
+		val func5 = (a: Int) => a * 2     //> func5  : Int => Int = book.ch3.functors.a_functors$$$Lambda$55/2095490653@
+                                                  //| 1500955a
+		val func6 = (a: Int) => a + "!"   //> func6  : Int => String = book.ch3.functors.a_functors$$$Lambda$56/24374586
+                                                  //| 4@29b5cd00
 		val func7 = func4.map(func5).map(func6)
-                                                  //> func7  : Int => String = scala.Function1$$Lambda$44/54495403@cb51256
+                                                  //> func7  : Int => String = scala.Function1$$Lambda$44/1260134048@60285225
 
 		func7(123)                        //> res8: String = 248!
 
@@ -545,8 +547,8 @@ object a_functors {
 					case Leaf(value) =>
 					Leaf(func(value))
 				}
-		}                                 //> treeFunctor  : cats.Functor[book.ch3.a_functors.Tree] = book.ch3.a_functor
-                                                  //| s$$anon$1@5bfbf16f
+		}                                 //> treeFunctor  : cats.Functor[book.ch3.functors.a_functors.Tree] = book.ch3.
+                                                  //| functors.a_functors$$anon$1@45820e51
 
 	/*
 		Let’s use our Functor to transform some Trees:
@@ -575,10 +577,11 @@ object a_functors {
 		Now we can use our Functor properly:
 	*/
 
-	Tree.leaf(100).map(_ * 2)                 //> res11: book.ch3.a_functors.Tree[Int] = Leaf(200)
+	Tree.leaf(100).map(_ * 2)                 //> res11: book.ch3.functors.a_functors.Tree[Int] = Leaf(200)
 
 	Tree.branch(Tree.leaf(10), Tree.leaf(20)).map(_ * 2)
-                                                  //> res12: book.ch3.a_functors.Tree[Int] = Branch(Leaf(20),Leaf(40))
+                                                  //> res12: book.ch3.functors.a_functors.Tree[Int] = Branch(Leaf(20),Leaf(40))
+                                                  //| 
 
   /*
     ---------------------------------------------------------------
@@ -678,8 +681,8 @@ object a_functors {
 		}
 		
 		def format[A](value: A)(implicit p: Printable[A]): String =
-			p.format(value)           //> format: [A](value: A)(implicit p: book.ch3.a_functors.Printable[A])String
-                                                  //| 
+			p.format(value)           //> format: [A](value: A)(implicit p: book.ch3.functors.a_functors.Printable[A
+                                                  //| ])String
 		
   /*
     ---------------------------------------------------------------
@@ -691,15 +694,15 @@ object a_functors {
 			new Printable[String] {
 				def format(value: String): String =
 					"\"" + value + "\""
-		}                                 //> stringPrintable  : book.ch3.a_functors.Printable[String] = book.ch3.a_func
-                                                  //| tors$$anon$3@5bcea91b
+		}                                 //> stringPrintable  : book.ch3.functors.a_functors.Printable[String] = book.c
+                                                  //| h3.functors.a_functors$$anon$3@cb51256
 		
 		implicit val booleanPrintable: Printable[Boolean] =
 			new Printable[Boolean] {
 				def format(value: Boolean): String =
 					if(value) "yes" else "no"
-				}                 //> booleanPrintable  : book.ch3.a_functors.Printable[Boolean] = book.ch3.a_fu
-                                                  //| nctors$$anon$4@5f3a4b84
+				}                 //> booleanPrintable  : book.ch3.functors.a_functors.Printable[Boolean] = book
+                                                  //| .ch3.functors.a_functors$$anon$4@59906517
 
 		format("hello")                   //> res13: String = "hello"
 
@@ -741,8 +744,9 @@ object a_functors {
 
 		implicit def boxPrintable[A](implicit p: Printable[A]) =
 			p.contramap[Box[A]](_.value)
-                                                  //> boxPrintable: [A](implicit p: book.ch3.a_functors.Printable[A])book.ch3.a_
-                                                  //| functors.Printable[book.ch3.a_functors.Box[A]]
+                                                  //> boxPrintable: [A](implicit p: book.ch3.functors.a_functors.Printable[A])bo
+                                                  //| ok.ch3.functors.a_functors.Printable[book.ch3.functors.a_functors.Box[A]]
+                                                  //| 
 	/*
 		Using contramap is much simpler, and conveys the functional programming
 		approach of building solutions by combining simple building blocks using pure
@@ -934,7 +938,7 @@ object a_functors {
 
 		encode(Box(123.4))                //> res19: String = 123.4
 
-		decode[Box[Double]]("123.4")      //> res20: book.ch3.a_functors.Box[Double] = Box(123.4)
+		decode[Box[Double]]("123.4")      //> res20: book.ch3.functors.a_functors.Box[Double] = Box(123.4)
 
 
   /*
@@ -989,11 +993,11 @@ object a_functors {
 		import cats.Show
 		import cats.instances.string._
 		
-		val showString = Show[String]     //> showString  : cats.Show[String] = cats.Show$$anon$2@612fc6eb
+		val showString = Show[String]     //> showString  : cats.Show[String] = cats.Show$$anon$2@ed9d034
 		
 		val showSymbol = Contravariant[Show].
 			contramap(showString)((sym: Symbol) => s"'${sym.name}")
-                                                  //> showSymbol  : cats.Show[Symbol] = cats.Show$$anon$1@4a87761d
+                                                  //> showSymbol  : cats.Show[Symbol] = cats.Show$$anon$1@74ad1f1f
 		
 		showSymbol.show('dave)            //> res21: String = 'dave
 	
@@ -1043,8 +1047,8 @@ object a_functors {
 
 		implicit val symbolMonoid: Monoid[Symbol] =
 			Monoid[String].imap(Symbol.apply)(_.name)
-                                                  //> symbolMonoid  : cats.Monoid[Symbol] = cats.Invariant$$anon$11$$anon$9@1068
-                                                  //| e947
+                                                  //> symbolMonoid  : cats.Monoid[Symbol] = cats.Invariant$$anon$11$$anon$9@4b53
+                                                  //| f538
 	
 		Monoid[Symbol].empty              //> res23: Symbol = '
 
@@ -1062,12 +1066,12 @@ object a_functors {
 		import cats.instances.function._ // for Functor
 		import cats.syntax.functor._ // for map
 	
-		val func8 = (x: Int) => x.toDouble//> func8  : Int => Double = book.ch3.a_functors$$$Lambda$75/2109874862@aecb35
-                                                  //| a
-		val func9 = (y: Double) => y * 2  //> func9  : Double => Double = book.ch3.a_functors$$$Lambda$76/1607305514@8b8
-                                                  //| 7145
+		val func8 = (x: Int) => x.toDouble//> func8  : Int => Double = book.ch3.functors.a_functors$$$Lambda$75/32332691
+                                                  //| 1@4bb4de6a
+		val func9 = (y: Double) => y * 2  //> func9  : Double => Double = book.ch3.functors.a_functors$$$Lambda$76/20741
+                                                  //| 85499@2f8f5f62
 		
-		val func10 = func1.map(func9)     //> func10  : Int => Double = scala.Function1$$Lambda$44/54495403@6483f5ae
+		val func10 = func1.map(func9)     //> func10  : Int => Double = scala.Function1$$Lambda$44/1260134048@1068e947
 
 	/*
 		but failed if the flag was missing:
@@ -1149,11 +1153,11 @@ object a_functors {
 		are all equivalent:
 	*/
 		val func3a: Int => Double =
-			a => func2(func1(a))      //> func3a  : Int => Double = book.ch3.a_functors$$$Lambda$78/1943325854@80169
-                                                  //| cf
+			a => func2(func1(a))      //> func3a  : Int => Double = book.ch3.functors.a_functors$$$Lambda$78/1607305
+                                                  //| 514@8b87145
 
 		val func3b: Int => Double =
-			func2.compose(func1)      //> func3b  : Int => Double = scala.Function1$$Lambda$44/54495403@5427c60c
+			func2.compose(func1)      //> func3b  : Int => Double = scala.Function1$$Lambda$44/1260134048@6483f5ae
 
 	/*
 		// Hypothetical example. This won't actually compile:

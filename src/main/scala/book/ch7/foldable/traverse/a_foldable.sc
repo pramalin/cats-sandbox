@@ -1,19 +1,23 @@
-package book.ch7
+package book.ch7.foldable.traverse
 
 object a_foldable {
   /*
 		Chapter 7
+		
 		Foldable and Traverse
+
 		In this chapter we’ll look at two type classes that capture iteration over collec-
 		tions:
+
 			• Foldable abstracts the familiar foldLeft and foldRight operations;
 			• Traverse is a higher-level abstraction that uses Applicatives to iterate
-		with less pain than folding.
+				with less pain than folding.
 
 		We’ll start by looking at Foldable, and then examine cases where folding
 		becomes complex and Traverse becomes convenient.
 
 		7.1 Foldable
+
 		The Foldable type class captures the foldLeft and foldRight methods
 		we’re used to in sequences like Lists, Vectors, and Streams. Using Foldable,
 		we can write generic folds that work with a variety of sequence types.
@@ -21,10 +25,12 @@ object a_foldable {
 		gives us great use cases for Monoids and the Eval monad.
 
 		7.1.1 Folds and Folding
+
 		Let’s start with a quick recap of the general concept of folding. We supply an
 		accumulator value and a binary function to combine it with each item in the
 		sequence:
 	*/
+
   def show[A](list: List[A]): String =
     list.foldLeft("nil")((accum, item) => s"$item then $accum")
                                                   //> show: [A](list: List[A])String
@@ -69,8 +75,7 @@ object a_foldable {
 		:: as the binary operator. What results do you get in each case?
 
 		Solution:
-	*/
-  /*
+		----------------------- solution ------------------------------
 		G.1 Reflecting on Folds
 		Folding from left to right reverses the list:
 	*/
@@ -92,9 +97,8 @@ object a_foldable {
 		// required: scala.collection.immutable.Nil.type
 		// List(1, 2, 3).foldRight(Nil)(_ :: _)
 		//                                ^
-	*/
+	  ---------------------------------------------------------------
 
-  /*
 		7.1.3 Exercise: Scaf-fold-ing Other Methods
 		foldLeft and foldRight are very general methods. We can use them to implement
 		many of the other high-level sequence operations we know. Prove
@@ -102,9 +106,8 @@ object a_foldable {
 		and sum methods in terms of foldRight.
 
 		Solution:
-	*/
+		----------------------- solution ------------------------------
 
-  /*
 		G.2 Scaf-fold-ing Other Methods
 		Here are the solutions:
 	*/
@@ -149,4 +152,8 @@ object a_foldable {
   import cats.instances.int._ // for Monoid
   sumWithMonoid(List(1, 2, 3))                    //> res10: Int = 6
 
+	/*
+	  ---------------------------------------------------------------
+	*/
+	
 }

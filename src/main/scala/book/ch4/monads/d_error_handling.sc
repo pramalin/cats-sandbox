@@ -50,8 +50,6 @@ object d_error_handling {
 		type ErrorOr[A] = Either[String, A]
 		
 		val monadError = MonadError[ErrorOr, String]
-                                                  //> monadError  : cats.MonadError[book.ch4.d_error_handling.ErrorOr,String] = c
-                                                  //| ats.instances.EitherInstances$$anon$1@77b52d12
 
 	/*
 			ApplicativeError
@@ -68,10 +66,9 @@ object d_error_handling {
 		an instance representing a failure:
 	*/
 	
-		val success = monadError.pure(42) //> success  : book.ch4.d_error_handling.ErrorOr[Int] = Right(42)
+		val success = monadError.pure(42)
 
 		val failure = monadError.raiseError("Badness")
-                                                  //> failure  : book.ch4.d_error_handling.ErrorOr[Nothing] = Left(Badness)
 
 	/*
 		handleError is the compliment of raiseError. It allows us to consume an
@@ -84,8 +81,7 @@ object d_error_handling {
 				monadError.pure("It's ok")
 			case other =>
 				monadError.raiseError("It's not ok")
-		}                                 //> res0: book.ch4.d_error_handling.ErrorOr[book.ch4.d_error_handling.ErrorOr[S
-                                                  //| tring]] = Right(Right(It's ok))
+		}
 
 	/*
 		There is also a third useful method called ensure that implements filterlike
@@ -95,7 +91,6 @@ object d_error_handling {
 		import cats.syntax.either._ // for asRight
 
 		monadError.ensure(success)("Number too low!")(_ > 1000)
-                                                  //> res1: book.ch4.d_error_handling.ErrorOr[Int] = Left(Number too low!)
 
 	/*
 		Cats provides syntax for raiseError and handleError
@@ -107,14 +102,12 @@ object d_error_handling {
 		import cats.syntax.applicativeError._ // for raiseError etc
 		import cats.syntax.monadError._ // for ensure
 
-		val success1 = 42.pure[ErrorOr]   //> success1  : book.ch4.d_error_handling.ErrorOr[Int] = Right(42)
+		val success1 = 42.pure[ErrorOr]
 
 		val failure1 = "Badness".raiseError[ErrorOr, Int]
-                                                  //> failure1  : book.ch4.d_error_handling.ErrorOr[Int] = Left(Badness)
 
 
 		success1.ensure("Number to low!")(_ > 1000)
-                                                  //> res2: Either[String,Int] = Left(Number to low!)
 
 	
 	/*
@@ -134,10 +127,8 @@ object d_error_handling {
 
 		val exn: Throwable =
 			new RuntimeException("It's all gone wrong")
-                                                  //> exn  : Throwable = java.lang.RuntimeException: It's all gone wrong
 	
-		exn.raiseError[Try, Int]          //> res3: scala.util.Try[Int] = Failure(java.lang.RuntimeException: It's all go
-                                                  //| ne wrong)
+		exn.raiseError[Try, Int]
 
 	/*
 		4.5.4 Exercise: Abstracting - not found

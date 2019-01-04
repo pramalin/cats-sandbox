@@ -137,7 +137,7 @@ object a_monads {
 		for {
 			x <- (1 to 3).toList
 			y <- (4 to 5).toList
-		} yield (x, y)                    //> res4: List[(Int, Int)] = List((1,4), (1,5), (2,4), (2,5), (3,4), (3,5))
+		} yield (x, y)
 	
 	/*
 		However, there is another mental model we can apply that highlights the
@@ -319,22 +319,18 @@ object a_monads {
 		import cats.instances.option._ // for Monad
 		import cats.instances.list._ // for Monad
 	
-		val opt1 = Monad[Option].pure(3)  //> opt1  : Option[Int] = Some(3)
+		val opt1 = Monad[Option].pure(3)
 
 		val opt2 = Monad[Option].flatMap(opt1)(a => Some(a + 2))
-                                                  //> opt2  : Option[Int] = Some(5)
 
 		val opt3 = Monad[Option].map(opt2)(a => 100 * a)
-                                                  //> opt3  : Option[Int] = Some(500)
 
-		val list1 = Monad[List].pure(3)   //> list1  : List[Int] = List(3)
+		val list1 = Monad[List].pure(3)
 
 		val list2 = Monad[List].
 			flatMap(List(1, 2, 3))(a => List(a, a*10))
-                                                  //> list2  : List[Int] = List(1, 10, 2, 20, 3, 30)
 
 		val list3 = Monad[List].map(list2)(a => a + 123)
-                                                  //> list3  : List[Int] = List(124, 133, 125, 143, 126, 153)
 
   /*
 
@@ -350,17 +346,14 @@ object a_monads {
 		import cats.instances.option._ // for Monad
 
 		Monad[Option].flatMap(Option(1))(a => Option(a*2))
-                                                  //> res5: Option[Int] = Some(2)
 
 		import cats.instances.list._ // for Monad
 
 		Monad[List].flatMap(List(1, 2, 3))(a => List(a, a*10))
-                                                  //> res6: List[Int] = List(1, 10, 2, 20, 3, 30)
 
 		import cats.instances.vector._ // for Monad
 
 		Monad[Vector].flatMap(Vector(1, 2, 3))(a => Vector(a, a*10))
-                                                  //> res7: Vector[Int] = Vector(1, 10, 2, 20, 3, 30)
 
   /*
 
@@ -387,8 +380,7 @@ object a_monads {
   */
   
 		import scala.concurrent.ExecutionContext.Implicits.global
-		val fm = Monad[Future]            //> fm  : cats.Monad[scala.concurrent.Future] = cats.instances.FutureInstances
-                                                  //| $$anon$1@dc24521
+		val fm = Monad[Future]
 
 	/*
 		The Monad instance uses the captured ExecutionContext for subsequent
@@ -396,9 +388,8 @@ object a_monads {
 	*/
 		
 		val future = fm.flatMap(fm.pure(1))(x => fm.pure(x + 2))
-                                                  //> future  : scala.concurrent.Future[Int] = Future(<not completed>)
 
-		Await.result(future, 1.second)    //> res8: Int = 3
+		Await.result(future, 1.second)
 
 	/*
 		In addition to the above, Cats provides a host of new monads that we don’t
@@ -425,9 +416,9 @@ object a_monads {
 		import cats.instances.list._ // for Monad
 		import cats.syntax.applicative._ // for pure
 
-		1.pure[Option]                    //> res9: Option[Int] = Some(1)
+		1.pure[Option]
 
-		1.pure[List]                      //> res10: List[Int] = List(1)
+		1.pure[List]
 
 	
 	/*
@@ -444,16 +435,13 @@ object a_monads {
 	
 		def sumSquare[F[_]: Monad](a: F[Int], b: F[Int]): F[Int] =
 			a.flatMap(x => b.map(y => x*x + y*y))
-                                                  //> sumSquare: [F[_]](a: F[Int], b: F[Int])(implicit evidence$3: cats.Monad[F]
-                                                  //| )F[Int]
 
 		import cats.instances.option._ // for Monad
 		import cats.instances.list._ // for Monad
 
-		sumSquare(Option(3), Option(4))   //> res11: Option[Int] = Some(25)
+		sumSquare(Option(3), Option(4))
 
 		sumSquare(List(1, 2, 3), List(4, 5))
-                                                  //> res12: List[Int] = List(17, 26, 20, 29, 25, 34)
 
   /*
 		We can rewrite this code using for comprehensions. The compiler will “do the
@@ -465,13 +453,11 @@ object a_monads {
 			for {
 				x <- a
 				y <- b
-			} yield x*x + y*y         //> sumSquare2: [F[_]](a: F[Int], b: F[Int])(implicit evidence$4: cats.Monad[F
-                                                  //| ])F[Int]
+			} yield x*x + y*y
 
-		sumSquare2(Option(3), Option(4))  //> res13: Option[Int] = Some(25)
+		sumSquare2(Option(3), Option(4))
 
 		sumSquare2(List(1, 2, 3), List(4, 5))
-                                                  //> res14: List[Int] = List(17, 26, 20, 29, 25, 34)
   
   /*
 		That’s more or less everything we need to know about the generalities of monads

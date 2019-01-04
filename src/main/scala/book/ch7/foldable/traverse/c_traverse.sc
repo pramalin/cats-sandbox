@@ -1,4 +1,4 @@
-package book.ch7
+package book.ch7.foldable.traverse
 
 object c_traverse {
   /*
@@ -163,10 +163,10 @@ object c_traverse {
     list.foldLeft(List.empty[B].pure[F]) { (accum, item) =>
       (accum, func(item)).mapN(_ :+ _)
     }                                             //> listTraverse: [F[_], A, B](list: List[A])(func: A => F[B])(implicit evidenc
-                                                  //| e$3: cats.Applicative[F])F[List[B]]
+                                                  //| e$1: cats.Applicative[F])F[List[B]]
 
   def listSequence[F[_]: Applicative, B](list: List[F[B]]): F[List[B]] =
-    listTraverse(list)(identity)                  //> listSequence: [F[_], B](list: List[F[B]])(implicit evidence$4: cats.Applica
+    listTraverse(list)(identity)                  //> listSequence: [F[_], B](list: List[F[B]])(implicit evidence$2: cats.Applica
                                                   //| tive[F])F[List[B]]
 
   //	We can use listTraverse to re-implement our uptime example:
@@ -229,15 +229,17 @@ object c_traverse {
       } else {
         Validated.invalid(List(s"$n is not even"))
       }
-    }                                             //> process2: (inputs: List[Int])book.ch7.c_traverse.ErrorsOr[List[Int]]
+    }                                             //> process2: (inputs: List[Int])book.ch7.foldable.traverse.c_traverse.ErrorsOr
+                                                  //| [List[Int]]
 
   /*
 		What does this method produce for the following inputs?
 	*/
 
-  process2(List(2, 4, 6))                         //> res8: book.ch7.c_traverse.ErrorsOr[List[Int]] = Valid(List(2, 4, 6))
-  process2(List(1, 2, 3))                         //> res9: book.ch7.c_traverse.ErrorsOr[List[Int]] = Invalid(List(1 is not even,
-                                                  //|  3 is not even))
+  process2(List(2, 4, 6))                         //> res8: book.ch7.foldable.traverse.c_traverse.ErrorsOr[List[Int]] = Valid(Lis
+                                                  //| t(2, 4, 6))
+  process2(List(1, 2, 3))                         //> res9: book.ch7.foldable.traverse.c_traverse.ErrorsOr[List[Int]] = Invalid(L
+                                                  //| ist(1 is not even, 3 is not even))
 
   /*
 		7.2.3 Traverse in Cats
@@ -268,8 +270,8 @@ object c_traverse {
   import cats.instances.list._ // for Traverse
 
   val totalUptime2: Future[List[Int]] =
-    Traverse[List].traverse(hostnames)(getUptime) //> totalUptime2  : scala.concurrent.Future[List[Int]] = Future(Success(List(10
-                                                  //| 20, 960, 840)))
+    Traverse[List].traverse(hostnames)(getUptime) //> totalUptime2  : scala.concurrent.Future[List[Int]] = Future(<not completed>
+                                                  //| )
   Await.result(totalUptime2, 1.second)            //> res10: List[Int] = List(1020, 960, 840)
 
   val numbers = List(Future(1), Future(2), Future(3))

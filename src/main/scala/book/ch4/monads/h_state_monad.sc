@@ -74,8 +74,6 @@ object h_state_monad {
 
 
 		val (state2, result2) = both.run(20).value
-                                                  //> state2  : Int = 42
-                                                  //| result2  : (String, String) = (Result of step1: 21,Result of step2: 42)
 
 	/*
 		As you can see, in this example the final state is the result of applying both
@@ -94,31 +92,25 @@ object h_state_monad {
 			• modify updates the state using an update function.
 
 	*/
-		val getDemo = State.get[Int]      //> getDemo  : cats.data.State[Int,Int] = cats.data.IndexedStateT@f4168b8
+		val getDemo = State.get[Int]
 
-		getDemo.run(10).value             //> res0: (Int, Int) = (10,10)
+		getDemo.run(10).value
 
-		val setDemo = State.set[Int](30)  //> setDemo  : cats.data.State[Int,Unit] = cats.data.IndexedStateT@58a90037
+		val setDemo = State.set[Int](30)
 
-		setDemo.run(10).value             //> res1: (Int, Unit) = (30,())
+		setDemo.run(10).value
 
 		val pureDemo = State.pure[Int, String]("Result")
-                                                  //> pureDemo  : cats.data.State[Int,String] = cats.data.IndexedStateT@70a9f84e
-                                                  //| 
 
-		pureDemo.run(10).value            //> res2: (Int, String) = (10,Result)
+		pureDemo.run(10).value
 
 		val inspectDemo = State.inspect[Int, String](_ + "!")
-                                                  //> inspectDemo  : cats.data.State[Int,String] = cats.data.IndexedStateT@1188e8
-                                                  //| 20
 
-		inspectDemo.run(10).value         //> res3: (Int, String) = (10,10!)
+		inspectDemo.run(10).value
 
 		val modifyDemo = State.modify[Int](_ + 1)
-                                                  //> modifyDemo  : cats.data.State[Int,Unit] = cats.data.IndexedStateT@33b37288
-                                                  //| 
 
-		modifyDemo.run(10).value          //> res4: (Int, Unit) = (11,())
+		modifyDemo.run(10).value
 		
 	/*
 		We can assemble these building blocks using a for comprehension. We typically
@@ -134,12 +126,9 @@ object h_state_monad {
 		b <- get[Int]
 		_ <- modify[Int](_ + 1)
 		c <- inspect[Int, Int](_ * 1000)
-		} yield (a, b, c)                 //> program  : cats.data.State[Int,(Int, Int, Int)] = cats.data.IndexedStateT@7
-                                                  //| 181ae3f
+		} yield (a, b, c)
 
 		val (state3, result3) = program.run(1).value
-                                                  //> state3  : Int = 3
-                                                  //| result3  : (Int, Int, Int) = (1,2,3000)
 
 	/*
 
@@ -222,7 +211,7 @@ object h_state_monad {
 				case "*" => operator(_ * _)
 				case "/" => operator(_ / _)
 				case num => operand(num.toInt)
-			}                         //> evalOne: (sym: String)book.ch4.h_state_monad.CalcState[Int]
+			}
 	
 	/*
 		Let’s look at operand first. All we have to do is push a number onto the stack.
@@ -232,7 +221,7 @@ object h_state_monad {
 		def operand(num: Int): CalcState[Int] =
 			State[List[Int], Int] { stack =>
 				(num :: stack, num)
-		}                                 //> operand: (num: Int)book.ch4.h_state_monad.CalcState[Int]
+		}
 	
 	/*
 		The operator func􀦞on is a li􀂂le more complex. We have to pop two operands
@@ -249,7 +238,7 @@ object h_state_monad {
 
 				case _ =>
 					sys.error("Fail!")
-			}                         //> operator: (func: (Int, Int) => Int)book.ch4.h_state_monad.CalcState[Int]
+			}
 
 	/*
 	  ---------------------------------------------------------------
@@ -259,7 +248,7 @@ object h_state_monad {
 		Eval instance:
 	*/
 	
-		evalOne("42").runA(Nil).value     //> res5: Int = 42
+		evalOne("42").runA(Nil).value
 
 	/*
 		We can represent more complex programs using evalOne, map, and flatMap.
@@ -271,10 +260,9 @@ object h_state_monad {
 			_ <- evalOne("1")
 			_ <- evalOne("2")
 			ans <- evalOne("+")
-		} yield ans                       //> program1  : cats.data.IndexedStateT[cats.Eval,List[Int],List[Int],Int] = ca
-                                                  //| ts.data.IndexedStateT@11c20519
+		} yield ans
 
-		program1.runA(Nil).value          //> res6: Int = 3
+		program1.runA(Nil).value
 
 	/*
 		Generalise this example by writing an evalAll method that computes the
@@ -300,7 +288,7 @@ object h_state_monad {
 		def evalAll(input: List[String]): CalcState[Int] =
 			input.foldLeft(0.pure[CalcState]) { (a, b) =>
 				a.flatMap(_ => evalOne(b))
-			}                         //> evalAll: (input: List[String])book.ch4.h_state_monad.CalcState[Int]
+			}
 
 	/*
 	  ---------------------------------------------------------------
@@ -309,10 +297,8 @@ object h_state_monad {
 	*/
 	
 		val program2 = evalAll(List("1", "2", "+", "3", "*"))
-                                                  //> program2  : book.ch4.h_state_monad.CalcState[Int] = cats.data.IndexedStateT
-                                                  //| @71248c21
 
-		program2.runA(Nil).value          //> res7: Int = 9
+		program2.runA(Nil).value
 
 	/*
 		Because evalOne and evalAll both return instances of State, we can thread
@@ -325,10 +311,9 @@ object h_state_monad {
 			_ <- evalAll(List("1", "2", "+"))
 			_ <- evalAll(List("3", "4", "+"))
 			ans <- evalOne("*")
-		} yield ans                       //> program3  : cats.data.IndexedStateT[cats.Eval,List[Int],List[Int],Int] = ca
-                                                  //| ts.data.IndexedStateT@49e202ad
+		} yield ans
 
-		program3.runA(Nil).value          //> res8: Int = 21
+		program3.runA(Nil).value
 
 	/*
 		Complete the exercise by implementing an evalInput function that splits an
@@ -347,9 +332,8 @@ object h_state_monad {
 	*/
 		def evalInput(input: String): Int =
 			evalAll(input.split(" ").toList).runA(Nil).value
-                                                  //> evalInput: (input: String)Int
 	
-		evalInput("1 2 + 3 4 + *")        //> res9: Int = 21
+		evalInput("1 2 + 3 4 + *")
 
 	/*
 	  ---------------------------------------------------------------
