@@ -449,7 +449,7 @@
 					type Response[A] = Future[Either[String, A]]
 					// defined type alias Response
 	
-		Optimus Prime is ge􀦮ng tired of the nested for comprehensions in his neural
+		Optimus Prime is getting tired of the nested for comprehensions in his neural
 		matrix. Help him by rewriting Response using a monad transformer.
 
 		See the solution

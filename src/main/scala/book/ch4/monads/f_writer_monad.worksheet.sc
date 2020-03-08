@@ -287,7 +287,7 @@
 		When we call factorial, we now have to run the return value to extract the
 		log and our factorial:
 	*/
-		val (log2, res2) = factorial2(5).run
+		val (log2, result2) = factorial2(5).run
                                                   
 
 

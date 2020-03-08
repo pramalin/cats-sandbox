@@ -6,7 +6,7 @@
 		foldLeft and foldRight are flexible iteration methods but they require us
 		to do a lot of work to define accumulators and combinator functions. The
 		Traverse type class is a higher level tool that leverages Applicatives to
-		provide a more convenient, more lawful, pa􀂂ern for iteration.
+		provide a more convenient, more lawful, pattern for iteration.
 
 		7.2.1 Traversing with Futures
 		We can demonstrate Traverse using the Future.traverse and Future.

@@ -44,7 +44,7 @@
 				}
 	
 	Now, suppose we’re writing unit tests for UptimeService. We want to test
-	its ability to sum values, regardless of where it is ge􀦮ng them from. Here’s an
+	its ability to sum values, regardless of where it is getting them from. Here’s an
 	example:
 	
 				def testTotalUptime() = {
@@ -166,7 +166,7 @@
 		  ---------------------------------------------------------------
 
 	8.2 Abstracting over Monads
-	Let’s turn our a􀂂ention to UptimeService. We need to rewrite it to abstract
+	Let’s turn our attention to UptimeService. We need to rewrite it to abstract
 	over the two types of UptimeClient. We’ll do this in two stages: first we’ll
 	rewrite the class and method signatures, then the method bodies. Starting
 	with the method signatures:
@@ -233,7 +233,7 @@
 			to the Cats’ generic extension method that requires an implicit Functor parameter.
 		  ---------------------------------------------------------------
 
-	Finally, let’s turn our a􀂂ention to our unit tests. Our test code now works as
+	Finally, let’s turn our attention to our unit tests. Our test code now works as
 	intended without any modification. We create an instance of TestUptime-
 	Client and wrap it in an UptimeService. This effectively binds F to Id, allowing
 	the rest of the code to operate synchronously without worrying about

@@ -117,7 +117,7 @@
 		D.7 Hacking on Readers Part 2
 
 		Remember: the idea is to leave injecting the configuration until last. This
-		means se􀦮ng up functions that accept the config as a parameter and check it
+		means setting up functions that accept the config as a parameter and check it
 		against the concrete user info we have been given:
 	*/
 	
@@ -198,7 +198,7 @@
 
 		There are many ways of implementing dependency injection in Scala, from
 		simple techniques like methods with multiple parameter lists, through implicit
-		parameters and type classes, to complex techniques like the cake pa􀂂ern and
+		parameters and type classes, to complex techniques like the cake pattern and
 		DI frameworks.
 
 		Readers are most useful in situations where:

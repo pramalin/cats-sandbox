@@ -41,7 +41,7 @@
 		Similarly, when we map over an Option, we transform the contents but leave
 		the Some or None context unchanged. The same principle applies to Either
 		with its Left and Right contexts. This general notion of transformation, along
-		with the common pa􀂂ern of type signatures shown in Figure 3.1, is what connects
+		with the common pattern of type signatures shown in Figure 3.1, is what connects
 		the behaviour of map across different data types.
 
 		Because map leaves the structure of the context unchanged, we can call it
@@ -55,7 +55,7 @@
 		map(n => n + "!")                 
 
 	/*
-		We should think of map not as an iteration pa􀂂ern, but as a way of sequencing
+		We should think of map not as an iteration pattern, but as a way of sequencing
 		computations on values ignoring some complication dictated by the relevant
 		data type:
 
@@ -71,7 +71,7 @@
 
 		The map methods of List, Option, and Either apply functions eagerly. However,
 		the idea of sequencing computations is more general than this. Let’s
-		investigate the behaviour of some other functors that apply the pa􀂂ern in
+		investigate the behaviour of some other functors that apply the pattern in
 		different ways.
 
 		Futures
@@ -532,7 +532,7 @@
 		C.1 Branching out with Functors
 		The semantics are similar to writing a Functor for List. We recurse over the
 		data structure, applying the function to every Leaf we find. The functor laws
-		intuitively require us to retain the same structure with the same pa􀂂ern of
+		intuitively require us to retain the same structure with the same pattern of
 		Branch and Leaf nodes:
 	*/
 

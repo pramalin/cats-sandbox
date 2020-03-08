@@ -100,7 +100,7 @@
 
 		A.2 Printable Library Part 2
 
-		This is a standard use of the type class pa􀂂ern. First we define a set of custom
+		This is a standard use of the type class pattern. First we define a set of custom
 		data types for our applica􀦞on:
 */
 			final case class Cat(name: String, age: Int, color: String)

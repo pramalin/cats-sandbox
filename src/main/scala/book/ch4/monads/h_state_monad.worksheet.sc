@@ -224,7 +224,7 @@
 		}
 	
 	/*
-		The operator func􀦞on is a li􀂂le more complex. We have to pop two operands
+		The operator func􀦞on is a little more complex. We have to pop two operands
 		off the stack and push the result in their place. The code can fail if the stack
 		doesn’t have enough operands on it, but the exercise descrip􀦞on allows us to
 		throw an excep􀦞on in this case:

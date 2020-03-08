@@ -152,7 +152,7 @@
 					def empty: A
 				}
 		
-		We’ll see this kind of inheritance o􀁛en when discussing type classes. It provides
+		We’ll see this kind of inheritance often when discussing type classes. It provides
 		modularity and allows us to re-use behaviour. If we define a Monoid
 		for a type A, we get a Semigroup for free. Similarly, if a method requires a
 		parameter of type Semigroup[B], we can pass a Monoid[B] instead.
@@ -233,7 +233,7 @@
 
 
 	/*
-		Showing that the identity law holds in each case is straigh􀁿orward. Similarly
+		Showing that the identity law holds in each case is straightforward. Similarly
 		associativity of the combine operation can be shown by enumerating
 		the cases.
 	*/

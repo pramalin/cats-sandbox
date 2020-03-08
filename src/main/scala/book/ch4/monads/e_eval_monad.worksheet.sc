@@ -174,7 +174,7 @@
 
 	
 	/*
-		Note that, while the semantics of the originating Eval instances are main106
+		Note that, while the semantics of the originating Eval instances are main
 		tained, mapping functions are always called lazily on demand (def semantics):
 	*/
 

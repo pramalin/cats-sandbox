@@ -130,7 +130,7 @@
 		Lists
 
 		When we first encounter flatMap as budding Scala developers, we tend to
-		think of it as a pa􀂂ern for iterating over Lists. This is reinforced by the syntax
+		think of it as a pattern for iterating over Lists. This is reinforced by the syntax
 		of for comprehensions, which look very much like imperative for loops:
 	*/
 			

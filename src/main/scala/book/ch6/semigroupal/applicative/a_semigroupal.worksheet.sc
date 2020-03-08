@@ -792,7 +792,7 @@
 		See the solution
 		----------------------- solution ------------------------------
 		F.4 Form Validation Part 3
-		These definitions use the same pa􀂂erns as above:
+		These definitions use the same patterns as above:
 	*/
 
 		def nonBlank(name: String)(data: String): FailFast[String] =

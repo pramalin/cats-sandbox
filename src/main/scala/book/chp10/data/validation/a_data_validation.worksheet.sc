@@ -381,7 +381,7 @@ page 205
 		However, spliting our input and output types raises another issue. Up until
 		now we have operated under the assumption that a Check always returns its
 		input when successful. We used this in and and or to ignore the output of the
-		le􀁛 and right rules and simply return the original input on success:
+		left and right rules and simply return the original input on success:
 
 				(this(a), that(a)) match {
 					case And(left, right) =>
